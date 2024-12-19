@@ -39,10 +39,21 @@ namespace supermarket_pos
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            login loginpage = new login();
+            loginpage.Show();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void billing1_Load(object sender, EventArgs e)
         {
 
         }

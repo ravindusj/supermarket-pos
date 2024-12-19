@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace supermarket_pos
 {
-    public partial class billing : UserControl
+    public partial class loginpage : Form
     {
-        public billing()
+        public loginpage()
         {
             InitializeComponent();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            login login = new login();
-            login.Show();
         }
     }
 }
