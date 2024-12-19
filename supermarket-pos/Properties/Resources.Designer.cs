@@ -83,6 +83,26 @@ namespace supermarket_pos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap billing {
+            get {
+                object obj = ResourceManager.GetObject("billing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap billing1 {
+            get {
+                object obj = ResourceManager.GetObject("billing1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cart {
             get {
                 object obj = ResourceManager.GetObject("cart", resourceCulture);
@@ -93,9 +113,19 @@ namespace supermarket_pos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap grocery {
+        internal static System.Drawing.Bitmap cart1 {
             get {
-                object obj = ResourceManager.GetObject("grocery", resourceCulture);
+                object obj = ResourceManager.GetObject("cart1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cart11 {
+            get {
+                object obj = ResourceManager.GetObject("cart11", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -116,26 +146,6 @@ namespace supermarket_pos.Properties {
         internal static System.Drawing.Bitmap profit {
             get {
                 object obj = ResourceManager.GetObject("profit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap receipt__1_ {
-            get {
-                object obj = ResourceManager.GetObject("receipt (1)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap receipt__1_1 {
-            get {
-                object obj = ResourceManager.GetObject("receipt (1)1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

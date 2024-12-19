@@ -15,11 +15,14 @@ namespace supermarket_pos
         public Dashboard()
         {
             InitializeComponent();
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            loginpage login = new loginpage();
+            this.Hide();
+            login.Show();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -29,18 +32,17 @@ namespace supermarket_pos
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            inventory1.BringToFront();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            sales1.BringToFront();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            login loginpage = new login();
-            loginpage.Show();
+            billing1.BringToFront();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -50,7 +52,7 @@ namespace supermarket_pos
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            report1.BringToFront();
         }
 
         private void billing1_Load(object sender, EventArgs e)

@@ -68,23 +68,26 @@
             // 
             // textBox3
             // 
+            this.textBox3.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.textBox3.Location = new System.Drawing.Point(110, 99);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(160, 20);
+            this.textBox3.Size = new System.Drawing.Size(160, 27);
             this.textBox3.TabIndex = 5;
             // 
             // textBox2
             // 
+            this.textBox2.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.textBox2.Location = new System.Drawing.Point(110, 54);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(160, 20);
+            this.textBox2.Size = new System.Drawing.Size(160, 27);
             this.textBox2.TabIndex = 4;
             // 
             // textBox1
             // 
+            this.textBox1.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.textBox1.Location = new System.Drawing.Point(110, 9);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 20);
+            this.textBox1.Size = new System.Drawing.Size(160, 27);
             this.textBox1.TabIndex = 3;
             // 
             // label3
@@ -119,9 +122,10 @@
             // 
             // textBox4
             // 
+            this.textBox4.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.textBox4.Location = new System.Drawing.Point(544, 17);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(239, 20);
+            this.textBox4.Size = new System.Drawing.Size(239, 27);
             this.textBox4.TabIndex = 7;
             // 
             // label4
@@ -146,10 +150,12 @@
             // 
             // textBox5
             // 
+            this.textBox5.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.textBox5.Location = new System.Drawing.Point(116, 102);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(160, 20);
+            this.textBox5.Size = new System.Drawing.Size(160, 27);
             this.textBox5.TabIndex = 9;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // panel2
             // 
@@ -165,9 +171,10 @@
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.dateTimePicker1.Location = new System.Drawing.Point(165, 17);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 27);
             this.dateTimePicker1.TabIndex = 8;
             // 
             // label6

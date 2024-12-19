@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace supermarket_pos
 {
-    public partial class login : UserControl
+    public partial class report : UserControl
     {
-        public login()
+        public report()
         {
             InitializeComponent();
-        }
-
-        private void login_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
