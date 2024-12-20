@@ -82,11 +82,11 @@
             this.logoutBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F);
             this.logoutBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.logoutBtn.Image = ((System.Drawing.Image)(resources.GetObject("logoutBtn.Image")));
-            this.logoutBtn.Location = new System.Drawing.Point(-1, 590);
+            this.logoutBtn.Location = new System.Drawing.Point(0, 590);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(199, 45);
+            this.logoutBtn.Size = new System.Drawing.Size(193, 45);
             this.logoutBtn.TabIndex = 3;
-            this.logoutBtn.Text = "    Logout";
+            this.logoutBtn.Text = "Logout";
             this.logoutBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.logoutBtn.UseVisualStyleBackColor = true;
             this.logoutBtn.Click += new System.EventHandler(this.button5_Click);
@@ -99,11 +99,11 @@
             this.reportsBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F);
             this.reportsBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.reportsBtn.Image = ((System.Drawing.Image)(resources.GetObject("reportsBtn.Image")));
-            this.reportsBtn.Location = new System.Drawing.Point(-1, 376);
+            this.reportsBtn.Location = new System.Drawing.Point(0, 376);
             this.reportsBtn.Name = "reportsBtn";
-            this.reportsBtn.Size = new System.Drawing.Size(199, 45);
+            this.reportsBtn.Size = new System.Drawing.Size(193, 45);
             this.reportsBtn.TabIndex = 2;
-            this.reportsBtn.Text = "    Reports";
+            this.reportsBtn.Text = "Reports";
             this.reportsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.reportsBtn.UseVisualStyleBackColor = true;
             this.reportsBtn.Click += new System.EventHandler(this.button4_Click);
@@ -117,13 +117,13 @@
             this.inventoryBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F);
             this.inventoryBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.inventoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("inventoryBtn.Image")));
-            this.inventoryBtn.Location = new System.Drawing.Point(3, 269);
+            this.inventoryBtn.Location = new System.Drawing.Point(0, 269);
             this.inventoryBtn.Name = "inventoryBtn";
             this.inventoryBtn.Size = new System.Drawing.Size(193, 45);
             this.inventoryBtn.TabIndex = 1;
-            this.inventoryBtn.Text = "    Inventory";
+            this.inventoryBtn.Text = "Inventory";
             this.inventoryBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.inventoryBtn.UseVisualStyleBackColor = false;
+            this.inventoryBtn.UseVisualStyleBackColor = true;
             this.inventoryBtn.Click += new System.EventHandler(this.button3_Click);
             // 
             // salesBtn
@@ -134,11 +134,11 @@
             this.salesBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F);
             this.salesBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.salesBtn.Image = ((System.Drawing.Image)(resources.GetObject("salesBtn.Image")));
-            this.salesBtn.Location = new System.Drawing.Point(-1, 483);
+            this.salesBtn.Location = new System.Drawing.Point(0, 483);
             this.salesBtn.Name = "salesBtn";
-            this.salesBtn.Size = new System.Drawing.Size(199, 45);
+            this.salesBtn.Size = new System.Drawing.Size(193, 45);
             this.salesBtn.TabIndex = 1;
-            this.salesBtn.Text = "    Sales";
+            this.salesBtn.Text = "Sales";
             this.salesBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.salesBtn.UseVisualStyleBackColor = true;
             this.salesBtn.Click += new System.EventHandler(this.button2_Click);
@@ -155,11 +155,11 @@
             this.billingBtn.Location = new System.Drawing.Point(0, 162);
             this.billingBtn.Name = "billingBtn";
             this.billingBtn.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.billingBtn.Size = new System.Drawing.Size(198, 45);
+            this.billingBtn.Size = new System.Drawing.Size(193, 45);
             this.billingBtn.TabIndex = 0;
-            this.billingBtn.Text = "    Billing";
+            this.billingBtn.Text = "Billing";
             this.billingBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.billingBtn.UseVisualStyleBackColor = false;
+            this.billingBtn.UseVisualStyleBackColor = true;
             this.billingBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
