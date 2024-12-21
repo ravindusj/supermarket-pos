@@ -19,9 +19,24 @@ namespace supermarket_pos
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string username = textBox1.Text;
+            string password = textBox2.Text;
+
+            //if (username == credentials.username && password == credentials.password)
+            //{
+            //    Dashboard dash = new Dashboard();
+            //    this.Hide();
+            //    dash.Show();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Invalid username or password");
+            //}
             Dashboard dash = new Dashboard();
             this.Hide();
             dash.Show();
+
+
         }
     }
 }

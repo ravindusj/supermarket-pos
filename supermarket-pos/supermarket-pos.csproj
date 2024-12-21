@@ -52,6 +52,7 @@
     <Compile Include="billing.Designer.cs">
       <DependentUpon>billing.cs</DependentUpon>
     </Compile>
+    <Compile Include="credentials.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +84,16 @@
     </Compile>
     <Compile Include="sales.Designer.cs">
       <DependentUpon>sales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_MINIMART_POSDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_MINIMART_POSDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="_MINIMART_POSDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_MINIMART_POSDataSet1.xsd</DependentUpon>
     </Compile>
     <EmbeddedResource Include="billing.resx">
       <DependentUpon>billing.cs</DependentUpon>
@@ -121,6 +132,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="_MINIMART_POSDataSet.xsc">
+      <DependentUpon>_MINIMART_POSDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="_MINIMART_POSDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_MINIMART_POSDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_MINIMART_POSDataSet.xss">
+      <DependentUpon>_MINIMART_POSDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="_MINIMART_POSDataSet1.xsc">
+      <DependentUpon>_MINIMART_POSDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="_MINIMART_POSDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_MINIMART_POSDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_MINIMART_POSDataSet1.xss">
+      <DependentUpon>_MINIMART_POSDataSet1.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -174,7 +174,7 @@
             // 
             // billing1
             // 
-            this.billing1.Location = new System.Drawing.Point(197, -1);
+            this.billing1.Location = new System.Drawing.Point(205, 12);
             this.billing1.Name = "billing1";
             this.billing1.Size = new System.Drawing.Size(1067, 697);
             this.billing1.TabIndex = 1;

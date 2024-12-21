@@ -16,7 +16,7 @@ namespace supermarket_pos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Dashboard());
+            Application.Run(new loginpage());
         }
     }
 }
