@@ -82,7 +82,7 @@
             this.logoutBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F);
             this.logoutBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.logoutBtn.Image = ((System.Drawing.Image)(resources.GetObject("logoutBtn.Image")));
-            this.logoutBtn.Location = new System.Drawing.Point(0, 590);
+            this.logoutBtn.Location = new System.Drawing.Point(2, 596);
             this.logoutBtn.Name = "logoutBtn";
             this.logoutBtn.Size = new System.Drawing.Size(193, 45);
             this.logoutBtn.TabIndex = 3;
@@ -99,7 +99,7 @@
             this.reportsBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F);
             this.reportsBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.reportsBtn.Image = ((System.Drawing.Image)(resources.GetObject("reportsBtn.Image")));
-            this.reportsBtn.Location = new System.Drawing.Point(0, 376);
+            this.reportsBtn.Location = new System.Drawing.Point(2, 382);
             this.reportsBtn.Name = "reportsBtn";
             this.reportsBtn.Size = new System.Drawing.Size(193, 45);
             this.reportsBtn.TabIndex = 2;
@@ -117,7 +117,7 @@
             this.inventoryBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F);
             this.inventoryBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.inventoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("inventoryBtn.Image")));
-            this.inventoryBtn.Location = new System.Drawing.Point(0, 269);
+            this.inventoryBtn.Location = new System.Drawing.Point(2, 275);
             this.inventoryBtn.Name = "inventoryBtn";
             this.inventoryBtn.Size = new System.Drawing.Size(193, 45);
             this.inventoryBtn.TabIndex = 1;
@@ -134,7 +134,7 @@
             this.salesBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F);
             this.salesBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.salesBtn.Image = ((System.Drawing.Image)(resources.GetObject("salesBtn.Image")));
-            this.salesBtn.Location = new System.Drawing.Point(0, 483);
+            this.salesBtn.Location = new System.Drawing.Point(2, 489);
             this.salesBtn.Name = "salesBtn";
             this.salesBtn.Size = new System.Drawing.Size(193, 45);
             this.salesBtn.TabIndex = 1;
@@ -152,7 +152,7 @@
             this.billingBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.billingBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.billingBtn.Image = ((System.Drawing.Image)(resources.GetObject("billingBtn.Image")));
-            this.billingBtn.Location = new System.Drawing.Point(0, 162);
+            this.billingBtn.Location = new System.Drawing.Point(2, 168);
             this.billingBtn.Name = "billingBtn";
             this.billingBtn.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.billingBtn.Size = new System.Drawing.Size(193, 45);
@@ -174,7 +174,7 @@
             // 
             // billing1
             // 
-            this.billing1.Location = new System.Drawing.Point(200, 2);
+            this.billing1.Location = new System.Drawing.Point(199, -1);
             this.billing1.Name = "billing1";
             this.billing1.Size = new System.Drawing.Size(1067, 697);
             this.billing1.TabIndex = 1;

@@ -337,6 +337,11 @@ namespace supermarket_pos
 
         private void inventory_Load(object sender, EventArgs e)
         {
+            Timer timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += timer1_Tick;
+            timer.Start();
+            UpdateDateTime();
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -355,6 +360,30 @@ namespace supermarket_pos
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void UpdateDateTime()
+        {
+            label11.Text = DateTime.Now.ToString("yyyy-MM-dd") + "  " + DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            UpdateDateTime();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

@@ -17,6 +17,11 @@ namespace supermarket_pos
         }
         private void button3_Click(object sender, EventArgs e)
         {
+            string billNo = textBox1.Text;
+            string date = label8.Text;
+            string totalAmount = label9.Text;
+            string payment = textBox2.Text;
+            string cashier = textBox4.Text;
 
         }
         private void InitializeDataGridView()
@@ -91,6 +96,8 @@ namespace supermarket_pos
                 {
                     connection.Open();
                     string query = "SELECT productID, name, retail_price FROM inventory WHERE productID = @productID";
+                   
+
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@productID", textBox5.Text);
@@ -152,7 +159,7 @@ namespace supermarket_pos
         }
         private void UpdateDateTime()
         {
-            label8.Text = "Date - " + DateTime.Now.ToString("yyyy-MM-dd") + " Time - " + DateTime.Now.ToString("HH:mm:ss");
+            label8.Text =  DateTime.Now.ToString("yyyy-MM-dd") + "  "+ DateTime.Now.ToString("HH:mm:ss");
         }
 
         // Event handlers
@@ -240,6 +247,21 @@ namespace supermarket_pos
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            discount discount = new discount();
+            discount.ShowDialog();
+        }
     }
 
 }
