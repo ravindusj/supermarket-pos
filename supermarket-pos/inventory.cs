@@ -16,6 +16,7 @@ namespace supermarket_pos
     {
         private readonly string connectionString = "Data Source=LAPTOP-G4G46K72\\SQLEXPRESS;Initial Catalog=MINIMART-POS;Integrated Security=True;TrustServerCertificate=True";
         decimal totalValue = 0;
+
         public inventory()
         {
             InitializeComponent();
@@ -51,16 +52,12 @@ namespace supermarket_pos
             }
         }
 
-
         private void label2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
-
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -75,13 +72,14 @@ namespace supermarket_pos
 
                     if (count == 0)
                     {
-                        string insertQuery = "INSERT INTO inventory (productID, name, quantity, price) VALUES (@productID, @name, @quantity, @price)";
+                        string insertQuery = "INSERT INTO inventory (productID, name, quantity, retail_price, whole_price) VALUES (@productID, @name, @quantity, @retail_price,@whole_price)";
                         SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
 
                         insertCommand.Parameters.AddWithValue("@productID", textBox1.Text);
                         insertCommand.Parameters.AddWithValue("@name", textBox2.Text);
                         insertCommand.Parameters.AddWithValue("@quantity", textBox3.Text);
-                        insertCommand.Parameters.AddWithValue("@price", textBox4.Text);
+                        insertCommand.Parameters.AddWithValue("@retail_price", textBox4.Text);
+                        insertCommand.Parameters.AddWithValue("@whole_price", textBox7.Text);
 
                         insertCommand.ExecuteNonQuery();
                         MessageBox.Show("Product added successfully!");
@@ -99,9 +97,7 @@ namespace supermarket_pos
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
-
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -150,10 +146,8 @@ namespace supermarket_pos
             }
         }
 
-
         private void button3_Click(object sender, EventArgs e)
         {
-
             // Check if a row is selected
             if (dataGridView1.SelectedRows.Count > 0)
             {
@@ -163,13 +157,15 @@ namespace supermarket_pos
                 textBox1.Text = selectedRow.Cells["productID"].Value.ToString();
                 textBox2.Text = selectedRow.Cells["name"].Value.ToString();
                 textBox3.Text = selectedRow.Cells["quantity"].Value.ToString();
-                textBox4.Text = selectedRow.Cells["price"].Value.ToString();
+                textBox4.Text = selectedRow.Cells["retail_price"].Value.ToString();
+                textBox7.Text = selectedRow.Cells["whole_price"].Value.ToString();
             }
             else
             {
                 MessageBox.Show("Please select a row to edit.");
             }
         }
+
         private void UpdateRecord()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -178,14 +174,15 @@ namespace supermarket_pos
                 {
                     connection.Open();
 
-                    string updateQuery = "UPDATE inventory SET name = @name, quantity = @quantity, price = @price WHERE productID = @productID";
+                    string updateQuery = "UPDATE inventory SET name = @name, quantity = @quantity, retail_price = @retail_price, whole_price = @whole_price WHERE productID = @productID";
                     SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
 
                     // Use text box values for the update
                     updateCommand.Parameters.AddWithValue("@productID", textBox1.Text);
                     updateCommand.Parameters.AddWithValue("@name", textBox2.Text);
                     updateCommand.Parameters.AddWithValue("@quantity", textBox3.Text);
-                    updateCommand.Parameters.AddWithValue("@price", textBox4.Text);
+                    updateCommand.Parameters.AddWithValue("@retail_price", textBox4.Text);
+                    updateCommand.Parameters.AddWithValue("@whole_price", textBox7.Text);
 
                     int rowsAffected = updateCommand.ExecuteNonQuery();
 
@@ -207,32 +204,41 @@ namespace supermarket_pos
                 }
             }
         }
-      
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           
-
         }
-       
+
+        private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            // Recalculate total when a cell value changes
+            CalculateTotalValue();
+        }
+
+        private void DataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            // Recalculate total when rows are added
+            CalculateTotalValue();
+        }
+
+        private void DataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            // Recalculate total when rows are removed
+            CalculateTotalValue();
+        }
+
         private void button6_Click(object sender, EventArgs e)
         {
             UpdateRecord();
             CalculateTotalValue();
-
-            label5.Text = label5.Text.Replace("<Amount>", totalValue.ToString("C"));
-
-
         }
 
         private void label7_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -244,7 +250,7 @@ namespace supermarket_pos
             try
             {
                 // Initialize the total value
-           
+                totalValue = 0;
 
                 // Loop through the DataGridView rows
                 foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -252,30 +258,105 @@ namespace supermarket_pos
                     // Ensure the row is not a new row
                     if (!row.IsNewRow)
                     {
-                        if (row.Cells["quantity"].Value != null && row.Cells["price"].Value != null)
+                        // Access the quantity and price cells directly
+                        if (row.Cells["quantity"].Value != null && row.Cells["whole_price"].Value != null)
                         {
                             // Parse quantity and price
                             if (int.TryParse(row.Cells["quantity"].Value.ToString(), out int quantity) &&
-                                decimal.TryParse(row.Cells["price"].Value.ToString(), out decimal price))
+                                decimal.TryParse(row.Cells["whole_price"].Value.ToString(), out decimal whole_price))
                             {
                                 // Calculate the product and add it to the total
-                                totalValue += quantity * price;
+                                totalValue += quantity * whole_price;
                             }
                         }
                     }
                 }
 
-                // Replace <Amount> in the label's text with the calculated total value
-                label5.Text = label5.Text.Replace("<Amount>", totalValue.ToString("C"));
+                // Update the label with the calculated total value
+                label5.Text = totalValue.ToString("C");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error calculating total value: " + ex.Message);
             }
-           
         }
 
-   
-    }
 
+        private void FilterData()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Base query for filtering
+                    string query = "SELECT * FROM inventory WHERE 1=1";
+
+                    // Append conditions if search boxes are not empty
+                    if (!string.IsNullOrEmpty(textBox5.Text))
+                    {
+                        query += " AND productID LIKE @productID";
+                    }
+
+                    if (!string.IsNullOrEmpty(textBox6.Text))
+                    {
+                        query += " AND name LIKE @name";
+                    }
+
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    // Add parameters if the search boxes are not empty
+                    if (!string.IsNullOrEmpty(textBox5.Text))
+                    {
+                        command.Parameters.AddWithValue("@productID", "%" + textBox5.Text.Trim() + "%");
+                    }
+
+                    if (!string.IsNullOrEmpty(textBox6.Text))
+                    {
+                        command.Parameters.AddWithValue("@name", "%" + textBox6.Text.Trim() + "%");
+                    }
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable filteredTable = new DataTable();
+                    adapter.Fill(filteredTable);
+
+                    // Update DataGridView with the filtered data
+                    dataGridView1.DataSource = filteredTable;
+
+                    // Optionally recalculate the total value
+                    CalculateTotalValue();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error filtering data: " + ex.Message);
+                }
+            }
+        }
+
+
+        private void inventory_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            FilterData();
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            FilterData();
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
