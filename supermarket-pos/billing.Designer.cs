@@ -33,7 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(billing));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,17 +46,17 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.billprintBtn = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label9 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.billprintBtn = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -66,7 +65,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.textBox3);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label3);
@@ -76,14 +74,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(286, 161);
             this.panel1.TabIndex = 0;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.textBox3.Location = new System.Drawing.Point(110, 99);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(160, 27);
-            this.textBox3.TabIndex = 5;
             // 
             // textBox2
             // 
@@ -231,71 +221,6 @@
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(614, 86);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(38, 45);
-            this.button1.TabIndex = 12;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(671, 86);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(38, 45);
-            this.button2.TabIndex = 13;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // billprintBtn
-            // 
-            this.billprintBtn.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.billprintBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.billprintBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.billprintBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.billprintBtn.ForeColor = System.Drawing.Color.Black;
-            this.billprintBtn.Image = ((System.Drawing.Image)(resources.GetObject("billprintBtn.Image")));
-            this.billprintBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.billprintBtn.Location = new System.Drawing.Point(21, 620);
-            this.billprintBtn.Name = "billprintBtn";
-            this.billprintBtn.Size = new System.Drawing.Size(237, 45);
-            this.billprintBtn.TabIndex = 14;
-            this.billprintBtn.Text = "Bill Print";
-            this.billprintBtn.UseVisualStyleBackColor = false;
-            this.billprintBtn.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.Black;
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(264, 620);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(237, 45);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "Cash";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("Century Gothic", 12F);
@@ -324,13 +249,36 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(783, 613);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(144, 23);
+            this.label9.Size = new System.Drawing.Size(127, 21);
             this.label9.TabIndex = 6;
             this.label9.Text = "Total Amount -";
             this.label9.Click += new System.EventHandler(this.label9_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(783, 636);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(152, 21);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Discount Amount-";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label11.Location = new System.Drawing.Point(782, 659);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(68, 25);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "Total-";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // button3
             // 
@@ -349,26 +297,70 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
-            // label10
+            // button4
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(783, 636);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(173, 23);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "Discount Amount-";
+            this.button4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.Black;
+            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(264, 620);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(237, 45);
+            this.button4.TabIndex = 15;
+            this.button4.Text = "Cash";
+            this.button4.UseVisualStyleBackColor = false;
             // 
-            // label11
+            // billprintBtn
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(785, 659);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(62, 23);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "Total-";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
+            this.billprintBtn.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.billprintBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.billprintBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.billprintBtn.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.billprintBtn.ForeColor = System.Drawing.Color.Black;
+            this.billprintBtn.Image = ((System.Drawing.Image)(resources.GetObject("billprintBtn.Image")));
+            this.billprintBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.billprintBtn.Location = new System.Drawing.Point(21, 620);
+            this.billprintBtn.Name = "billprintBtn";
+            this.billprintBtn.Size = new System.Drawing.Size(237, 45);
+            this.billprintBtn.TabIndex = 14;
+            this.billprintBtn.Text = "Bill Print";
+            this.billprintBtn.UseVisualStyleBackColor = false;
+            this.billprintBtn.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(671, 86);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(38, 45);
+            this.button2.TabIndex = 13;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(614, 86);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(38, 45);
+            this.button1.TabIndex = 12;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // billing
             // 
@@ -405,7 +397,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;

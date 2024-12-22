@@ -9,12 +9,14 @@ namespace supermarket_pos
     {
         private readonly string connectionString = "Data Source=LAPTOP-G4G46K72\\SQLEXPRESS;Initial Catalog=MINIMART-POS;Integrated Security=True;TrustServerCertificate=True";
         private decimal totalBill = 0;
+        private decimal discountAmount = 0;  // Track discount amount
 
         public billing()
         {
             InitializeComponent();
             InitializeDataGridView();
         }
+
         private void button3_Click(object sender, EventArgs e)
         {
             string billNo = textBox1.Text;
@@ -22,11 +24,10 @@ namespace supermarket_pos
             string totalAmount = label9.Text;
             string payment = textBox2.Text;
             string cashier = textBox4.Text;
-
         }
+
         private void InitializeDataGridView()
         {
-            // Initialize DataGridView columns if they don't exist
             if (dataGridView1.Columns.Count == 0)
             {
                 dataGridView1.Columns.Add("ProductID", "Product ID");
@@ -36,15 +37,15 @@ namespace supermarket_pos
                 dataGridView1.Columns.Add("TotalAmount", "Total");
             }
 
-            // Set properties for better display
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
+
         private void label7_Click(object sender, EventArgs e)
         {
-
         }
+
         private void RetrieveProductData()
         {
             if (string.IsNullOrWhiteSpace(textBox5.Text))
@@ -63,10 +64,7 @@ namespace supermarket_pos
                         {
                             if (reader.Read())
                             {
-                                // You can optionally show product details in other textboxes here
-                                // For example:
-                                // txtProductName.Text = reader["name"].ToString();
-                                // txtPrice.Text = reader["retail_price"].ToString();
+                                // Product details logic remains the same
                             }
                         }
                     }
@@ -77,9 +75,9 @@ namespace supermarket_pos
                 }
             }
         }
+
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void AddProductToGrid()
@@ -96,8 +94,6 @@ namespace supermarket_pos
                 {
                     connection.Open();
                     string query = "SELECT productID, name, retail_price FROM inventory WHERE productID = @productID";
-                   
-
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@productID", textBox5.Text);
@@ -117,13 +113,9 @@ namespace supermarket_pos
                                 decimal retailPrice = Convert.ToDecimal(reader["retail_price"]);
                                 decimal totalPrice = retailPrice * quantity;
 
-                                // Add to DataGridView
                                 dataGridView1.Rows.Add(productId, productName, quantity, retailPrice, totalPrice);
-
-                                // Update total bill
                                 UpdateTotalBill();
 
-                                // Clear input fields
                                 textBox5.Clear();
                                 textBox6.Clear();
                                 textBox5.Focus();
@@ -149,20 +141,22 @@ namespace supermarket_pos
             {
                 totalBill += Convert.ToDecimal(row.Cells["TotalAmount"].Value);
             }
-            // Update the total bill label/textbox
-            // Assuming you have a label named lblTotalBill
-            label9.Text = "Total Amount: " + totalBill.ToString("C");  // C format specifier for currency
+            label9.Text = "Total Amount: " + totalBill.ToString("C");
+
+            // Update final amount after discount
+            decimal finalAmount = totalBill - discountAmount;
+            label11.Text = "Final Amount: " + finalAmount.ToString("C");
         }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
+
         private void UpdateDateTime()
         {
-            label8.Text =  DateTime.Now.ToString("yyyy-MM-dd") + "  "+ DateTime.Now.ToString("HH:mm:ss");
+            label8.Text = DateTime.Now.ToString("yyyy-MM-dd") + "  " + DateTime.Now.ToString("HH:mm:ss");
         }
 
-        // Event handlers
         private void timer1_Tick(object sender, EventArgs e)
         {
             UpdateDateTime();
@@ -181,9 +175,9 @@ namespace supermarket_pos
         {
             RetrieveProductData();
         }
+
         private void label8_Click_1(object sender, EventArgs e)
         {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -191,7 +185,6 @@ namespace supermarket_pos
             AddProductToGrid();
         }
 
-        // Add method to handle product deletion
         private void DeleteSelectedProduct()
         {
             if (dataGridView1.CurrentRow != null)
@@ -201,7 +194,6 @@ namespace supermarket_pos
             }
         }
 
-        // Add method to handle bill printing
         private void PrintBill()
         {
             if (dataGridView1.Rows.Count == 0)
@@ -209,10 +201,8 @@ namespace supermarket_pos
                 MessageBox.Show("No items to print");
                 return;
             }
-            // Implement your printing logic here
         }
 
-        // Add method to handle payment
         private void ProcessPayment()
         {
             if (dataGridView1.Rows.Count == 0)
@@ -220,25 +210,22 @@ namespace supermarket_pos
                 MessageBox.Show("No items in the bill");
                 return;
             }
-            // Implement your payment processing logic here
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
         }
 
         private void label9_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                // Remove the selected row
                 dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
-
-                // Update the total bill after deletion
                 UpdateTotalBill();
-
-                // Optional: Show confirmation message
                 MessageBox.Show("Item removed successfully!");
             }
             else
@@ -249,20 +236,36 @@ namespace supermarket_pos
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            discount discount = new discount();
-            discount.ShowDialog();
+            discount discountForm = new discount();
+            if (discountForm.ShowDialog() == DialogResult.OK)
+            {
+                decimal discountValue = discountForm.DiscountValue;
+                bool isPercentage = discountForm.IsPercentage;
+
+                // Calculate and format discount
+                if (isPercentage)
+                {
+                    label10.Text = "Discount: " + discountValue.ToString("0.##") + "%";
+                    discountAmount = totalBill * (discountValue / 100);
+                }
+                else
+                {
+                    label10.Text = "Discount: " + discountValue.ToString("C");
+                    discountAmount = discountValue;
+                }
+
+                // Calculate and display final amount
+                decimal finalAmount = totalBill - discountAmount;
+                label11.Text = "Total : " + finalAmount.ToString("C");
+            }
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
         }
     }
-
 }
-
