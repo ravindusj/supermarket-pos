@@ -48,9 +48,9 @@
             this.button2.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(121, 358);
+            this.button2.Location = new System.Drawing.Point(110, 385);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(167, 45);
+            this.button2.Size = new System.Drawing.Size(145, 45);
             this.button2.TabIndex = 21;
             this.button2.Text = "Enter";
             this.button2.UseVisualStyleBackColor = false;
@@ -60,26 +60,28 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(157, 93);
+            this.label1.Location = new System.Drawing.Point(102, 149);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(237, 56);
+            this.label1.Size = new System.Drawing.Size(160, 38);
             this.label1.TabIndex = 15;
             this.label1.Text = "Mini Mart";
             // 
             // textBox2
             // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
             this.textBox2.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.textBox2.Location = new System.Drawing.Point(199, 288);
+            this.textBox2.Location = new System.Drawing.Point(177, 319);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(157, 27);
             this.textBox2.TabIndex = 19;
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
             this.textBox1.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.textBox1.Location = new System.Drawing.Point(199, 210);
+            this.textBox1.Location = new System.Drawing.Point(177, 241);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(157, 27);
             this.textBox1.TabIndex = 18;
@@ -89,7 +91,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 15F);
             this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(53, 285);
+            this.label3.Location = new System.Drawing.Point(44, 321);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(116, 23);
             this.label3.TabIndex = 17;
@@ -100,7 +102,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 15F);
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(53, 207);
+            this.label2.Location = new System.Drawing.Point(31, 243);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 23);
             this.label2.TabIndex = 16;
@@ -111,7 +113,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox1.Image = global::supermarket_pos.Properties.Resources.grocery1;
-            this.pictureBox1.Location = new System.Drawing.Point(15, 17);
+            this.pictureBox1.Location = new System.Drawing.Point(63, 23);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(239, 129);
@@ -124,7 +126,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(408, 439);
+            this.ClientSize = new System.Drawing.Size(364, 462);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
@@ -133,9 +135,12 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "loginpage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "loginpage";
+            this.Load += new System.EventHandler(this.loginpage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

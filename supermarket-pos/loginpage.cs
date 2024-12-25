@@ -15,6 +15,7 @@ namespace supermarket_pos
         public loginpage()
         {
             InitializeComponent();
+            this.Text = "Login - Mini Mart";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -36,6 +37,11 @@ namespace supermarket_pos
             this.Hide();
             dash.Show();
 
+
+        }
+
+        private void loginpage_Load(object sender, EventArgs e)
+        {
 
         }
     }

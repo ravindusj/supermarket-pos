@@ -37,10 +37,10 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.reven1 = new supermarket_pos.reven();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.inven1 = new supermarket_pos.inven();
+            this.reven1 = new supermarket_pos.reven();
             this.staff1 = new supermarket_pos.staff();
+            this.inven1 = new supermarket_pos.inven();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +60,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label11.Location = new System.Drawing.Point(105, 14);
+            this.label11.Location = new System.Drawing.Point(104, 15);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 23);
             this.label11.TabIndex = 10;
@@ -136,15 +136,6 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // reven1
-            // 
-            this.reven1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.reven1.Location = new System.Drawing.Point(1, 2);
-            this.reven1.Name = "reven1";
-            this.reven1.Size = new System.Drawing.Size(1025, 568);
-            this.reven1.TabIndex = 0;
-            this.reven1.Load += new System.EventHandler(this.reven1_Load);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -156,13 +147,14 @@
             this.panel1.Size = new System.Drawing.Size(1025, 568);
             this.panel1.TabIndex = 0;
             // 
-            // inven1
+            // reven1
             // 
-            this.inven1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.inven1.Location = new System.Drawing.Point(0, 0);
-            this.inven1.Name = "inven1";
-            this.inven1.Size = new System.Drawing.Size(1026, 568);
-            this.inven1.TabIndex = 1;
+            this.reven1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.reven1.Location = new System.Drawing.Point(1, 2);
+            this.reven1.Name = "reven1";
+            this.reven1.Size = new System.Drawing.Size(1025, 568);
+            this.reven1.TabIndex = 0;
+            this.reven1.Load += new System.EventHandler(this.reven1_Load);
             // 
             // staff1
             // 
@@ -171,6 +163,14 @@
             this.staff1.Name = "staff1";
             this.staff1.Size = new System.Drawing.Size(1026, 568);
             this.staff1.TabIndex = 2;
+            // 
+            // inven1
+            // 
+            this.inven1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.inven1.Location = new System.Drawing.Point(0, 0);
+            this.inven1.Name = "inven1";
+            this.inven1.Size = new System.Drawing.Size(1026, 568);
+            this.inven1.TabIndex = 1;
             // 
             // report
             // 

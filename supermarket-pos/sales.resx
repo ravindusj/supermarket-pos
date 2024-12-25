@@ -121,7 +121,7 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACyBSURBVHhe7d0J
+        vwAADr8BOAVTJAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACyBSURBVHhe7d0J
         lFTVmcDxxw5qRFwQNxCDROKSxD1ugBoVTVdVg41BxV1ECCC4a9R2FwFj9uFMErKYiVP1qptuArI3tAiy
         ySaaRCNJjBqTkSREEQW65r3q64l2fyg091Z979X/d87/kJlJ5Nbk3ltfd1dXeQAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -318,7 +318,7 @@
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wAAADsABataJCQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACo5SURBVHhe7d0H
+        vgAADr4B6kKxwAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACo5SURBVHhe7d0H
         tJbVlfBxRUxiV2JizMSsL2MsTGJG1CR2QCPGyagooAOo2BJbDCpIgki4qCBSFXvLGJOIBbhwqdLhonRu
         44IICIKCYqQZOtwz74HDJ+gGbnnL3s/5/9f6rTWTyUhxP+fZb7nvewARERERERERERERERERERERERER
         ERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERER
@@ -505,7 +505,7 @@
   <data name="pictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAADv3SURBVHhe7d0J
+        vwAADr8BOAVTJAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAADv3SURBVHhe7d0J
         dBRV2v/xZncDl0EdEFzGUURZRAWRNQmbiOnuAHEDNxRcEBVFZBOC7EtAcQN1dI4yW7o7rLIvAmFNQjaC
         IqjjuLzOKDoOKDoG+l+3uf5nJnlQSKq7b3V9P+f8jnPeecdU3fvUU93VVbc8AAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -765,4 +765,7 @@
         YII=
 </value>
   </data>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

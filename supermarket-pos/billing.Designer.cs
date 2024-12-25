@@ -79,7 +79,9 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Century Gothic", 7F);
+            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dateTimePicker1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker1.Location = new System.Drawing.Point(110, 52);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(5);
             this.dateTimePicker1.MaximumSize = new System.Drawing.Size(160, 27);
@@ -92,13 +94,14 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.comboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.comboBox1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Cash"});
             this.comboBox1.Location = new System.Drawing.Point(110, 95);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 25);
+            this.comboBox1.Size = new System.Drawing.Size(160, 28);
             this.comboBox1.TabIndex = 21;
             // 
             // textBox1
@@ -194,7 +197,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label8.Location = new System.Drawing.Point(148, 15);
+            this.label8.Location = new System.Drawing.Point(154, 15);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 23);
             this.label8.TabIndex = 8;
@@ -289,11 +292,11 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label11.Location = new System.Drawing.Point(783, 659);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(76, 28);
+            this.label11.Size = new System.Drawing.Size(85, 32);
             this.label11.TabIndex = 20;
             this.label11.Text = "Total-";
             this.label11.Click += new System.EventHandler(this.label11_Click);
@@ -307,7 +310,7 @@
             this.button3.ForeColor = System.Drawing.Color.Black;
             this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(507, 620);
+            this.button3.Location = new System.Drawing.Point(511, 620);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(237, 45);
             this.button3.TabIndex = 18;
@@ -324,7 +327,7 @@
             this.button4.ForeColor = System.Drawing.Color.Black;
             this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(264, 620);
+            this.button4.Location = new System.Drawing.Point(266, 620);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(237, 45);
             this.button4.TabIndex = 15;
