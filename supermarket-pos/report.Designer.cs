@@ -30,37 +30,20 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(report));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.reven1 = new supermarket_pos.reven();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.inven1 = new supermarket_pos.inven();
+            this.staff1 = new supermarket_pos.staff();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(19, 111);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1025, 568);
-            this.panel1.TabIndex = 0;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(16, 15);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(994, 540);
-            this.dataGridView1.TabIndex = 13;
             // 
             // panel2
             // 
@@ -72,6 +55,18 @@
             this.panel2.Size = new System.Drawing.Size(1066, 53);
             this.panel2.TabIndex = 13;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.label11.Location = new System.Drawing.Point(105, 14);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 23);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "Time";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -82,39 +77,10 @@
             this.label6.TabIndex = 7;
             this.label6.Text = "Reports";
             // 
-            // button1
+            // timer1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(19, 60);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(338, 45);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Revenue";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(363, 60);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(338, 45);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "Inventory";
-            this.button2.UseVisualStyleBackColor = false;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // button3
             // 
@@ -132,23 +98,79 @@
             this.button3.TabIndex = 20;
             this.button3.Text = "Staff";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // label11
+            // button2
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label11.Location = new System.Drawing.Point(105, 14);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(53, 23);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "Time";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
+            this.button2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(363, 60);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(338, 45);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "Inventory";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // timer1
+            // button1
             // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(19, 60);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(338, 45);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Revenue";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // reven1
+            // 
+            this.reven1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.reven1.Location = new System.Drawing.Point(1, 2);
+            this.reven1.Name = "reven1";
+            this.reven1.Size = new System.Drawing.Size(1025, 568);
+            this.reven1.TabIndex = 0;
+            this.reven1.Load += new System.EventHandler(this.reven1_Load);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.reven1);
+            this.panel1.Controls.Add(this.staff1);
+            this.panel1.Controls.Add(this.inven1);
+            this.panel1.Location = new System.Drawing.Point(19, 111);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1025, 568);
+            this.panel1.TabIndex = 0;
+            // 
+            // inven1
+            // 
+            this.inven1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.inven1.Location = new System.Drawing.Point(0, 0);
+            this.inven1.Name = "inven1";
+            this.inven1.Size = new System.Drawing.Size(1026, 568);
+            this.inven1.TabIndex = 1;
+            // 
+            // staff1
+            // 
+            this.staff1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.staff1.Location = new System.Drawing.Point(0, 0);
+            this.staff1.Name = "staff1";
+            this.staff1.Size = new System.Drawing.Size(1026, 568);
+            this.staff1.TabIndex = 2;
             // 
             // report
             // 
@@ -162,24 +184,24 @@
             this.Name = "report";
             this.Size = new System.Drawing.Size(1067, 697);
             this.Load += new System.EventHandler(this.report_Load);
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Timer timer1;
+        private reven reven1;
+        private System.Windows.Forms.Panel panel1;
+        private staff staff1;
+        private inven inven1;
     }
 }

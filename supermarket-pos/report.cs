@@ -40,6 +40,26 @@ namespace supermarket_pos
         {
             UpdateDateTime();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            reven1.BringToFront();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            inven1.BringToFront();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            staff1.BringToFront();
+        }
+
+        private void reven1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
