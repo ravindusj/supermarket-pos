@@ -59,5 +59,10 @@ namespace supermarket_pos
         {
 
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            customers1.BringToFront();
+        }
     }
 }

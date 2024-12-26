@@ -158,6 +158,64 @@ namespace supermarket_pos
                 }
             }
         }
+
+        private void UpdateProfitsForDate(DateTime date)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Calculate total profits for the date
+                    string getTotalProfitQuery = @"
+                SELECT SUM((bd.quantity * (inv.retail_price - inv.whole_price))) as daily_profit
+                FROM bill_details bd
+                JOIN Billing b ON bd.billing_no = b.billing_no
+                JOIN inventory inv ON bd.productID = inv.productID
+                WHERE CAST(b.date AS DATE) = @date";
+
+                    decimal dailyProfit = 0;
+                    using (SqlCommand command = new SqlCommand(getTotalProfitQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@date", date.Date);
+                        object result = command.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            dailyProfit = Convert.ToDecimal(result);
+                        }
+                    }
+
+                    // Try to update existing record first
+                    string updateQuery = @"
+                UPDATE daily_profits 
+                SET total_profit = @profit 
+                WHERE date = @date";
+
+                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@date", date.Date);
+                        command.Parameters.AddWithValue("@profit", dailyProfit);
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        // If no record exists, insert new one
+                        if (rowsAffected == 0)
+                        {
+                            string insertQuery = @"
+                        INSERT INTO daily_profits (date, total_profit) 
+                        VALUES (@date, @profit)";
+
+                            command.CommandText = insertQuery;
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error updating profits record: " + ex.Message);
+                }
+            }
+        }
         private void button3_Click(object sender, EventArgs e)
         {
             string billNo = textBox1.Text;
@@ -219,11 +277,21 @@ namespace supermarket_pos
                                     command.Parameters.AddWithValue("@total", totalAmount);
                                     command.ExecuteNonQuery();
                                 }
+
+                                // Update inventory quantity
+                                query = "UPDATE inventory SET quantity = quantity - @quantity WHERE productID = @productId";
+                                using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                                {
+                                    command.Parameters.AddWithValue("@quantity", quantity);
+                                    command.Parameters.AddWithValue("@productId", productId);
+                                    command.ExecuteNonQuery();
+                                }
                             }
 
                             transaction.Commit();
 
                             UpdateSalesForDate(dateTimePicker1.Value);
+                            UpdateProfitsForDate(dateTimePicker1.Value);
 
                             MessageBox.Show("Bill saved successfully!");
                             GenerateUniqueBillNumber();

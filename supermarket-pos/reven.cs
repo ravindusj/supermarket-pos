@@ -13,8 +13,9 @@ namespace supermarket_pos
 {
     public partial class reven : UserControl
 
+
     {
-     
+        private readonly string connectionString = "Data Source=LAPTOP-G4G46K72\\SQLEXPRESS;Initial Catalog=MINIMART-POS;Integrated Security=True;TrustServerCertificate=True";
         public reven()
         {
             InitializeComponent();
@@ -29,44 +30,55 @@ namespace supermarket_pos
             dateTimePicker2.Format = DateTimePickerFormat.Custom;
             dateTimePicker2.CustomFormat = "yyyy-MM-dd";
 
-            // Load initial sales data
-            LoadSalesData(dateTimePicker2.Value);
+            LoadRevenueData(dateTimePicker2.Value);
         }
 
-        private void LoadSalesData(DateTime selectedDate)
+        private void LoadRevenueData(DateTime selectedDate)
         {
-            using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-G4G46K72\\SQLEXPRESS;Initial Catalog=MINIMART-POS;Integrated Security=True;TrustServerCertificate=True"))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     connection.Open();
-                    string query = "SELECT total_amount_of_sale FROM sales WHERE CAST(date AS DATE) = @date";
 
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    // Get sales data
+                    decimal totalSales = 0;
+                    string salesQuery = "SELECT total_amount_of_sale FROM sales WHERE CAST(date AS DATE) = @date";
+                    using (SqlCommand command = new SqlCommand(salesQuery, connection))
                     {
                         command.Parameters.AddWithValue("@date", selectedDate.Date);
-
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && result != DBNull.Value)
+                        object salesResult = command.ExecuteScalar();
+                        if (salesResult != null && salesResult != DBNull.Value)
                         {
-                            decimal totalSales = Convert.ToDecimal(result);
-                            label5.Text = totalSales.ToString("C2"); // Format as currency
-                        }
-                        else
-                        {
-                            label5.Text = "$0.00"; // No sales found for the selected date
+                            totalSales = Convert.ToDecimal(salesResult);
                         }
                     }
+
+                    // Get profit data
+                    decimal totalProfit = 0;
+                    string profitQuery = "SELECT total_profit FROM daily_profits WHERE CAST(date AS DATE) = @date";
+                    using (SqlCommand command = new SqlCommand(profitQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@date", selectedDate.Date);
+                        object profitResult = command.ExecuteScalar();
+                        if (profitResult != null && profitResult != DBNull.Value)
+                        {
+                            totalProfit = Convert.ToDecimal(profitResult);
+                        }
+                    }
+
+                    // Update UI
+                    label5.Text = totalSales.ToString("C2");
+                    label2.Text = totalProfit.ToString("C2");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error loading sales data: " + ex.Message);
+                    MessageBox.Show("Error loading revenue data: " + ex.Message);
                     label5.Text = "$0.00";
+                    label2.Text = "$0.00";
                 }
             }
         }
-
         private void reven_Load(object sender, EventArgs e)
         {
 
@@ -96,7 +108,12 @@ namespace supermarket_pos
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            LoadSalesData(dateTimePicker2.Value);
+            LoadRevenueData(dateTimePicker2.Value);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

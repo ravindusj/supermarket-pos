@@ -30,17 +30,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.logoutBtn = new System.Windows.Forms.Button();
             this.reportsBtn = new System.Windows.Forms.Button();
             this.inventoryBtn = new System.Windows.Forms.Button();
             this.salesBtn = new System.Windows.Forms.Button();
             this.billingBtn = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.billing1 = new supermarket_pos.billing();
             this.inventory1 = new supermarket_pos.inventory();
             this.report1 = new supermarket_pos.report();
             this.sales1 = new supermarket_pos.sales();
+            this.customers1 = new supermarket_pos.customers();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +51,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.logoutBtn);
@@ -60,6 +63,35 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(199, 700);
             this.panel1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 14.25F);
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.Location = new System.Drawing.Point(3, 334);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(193, 45);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Customers";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::supermarket_pos.Properties.Resources.grocery1;
+            this.pictureBox1.Location = new System.Drawing.Point(-1, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(199, 104);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -83,7 +115,7 @@
             this.logoutBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.logoutBtn.Image = ((System.Drawing.Image)(resources.GetObject("logoutBtn.Image")));
             this.logoutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.logoutBtn.Location = new System.Drawing.Point(2, 596);
+            this.logoutBtn.Location = new System.Drawing.Point(3, 583);
             this.logoutBtn.Name = "logoutBtn";
             this.logoutBtn.Size = new System.Drawing.Size(193, 45);
             this.logoutBtn.TabIndex = 3;
@@ -101,7 +133,7 @@
             this.reportsBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.reportsBtn.Image = ((System.Drawing.Image)(resources.GetObject("reportsBtn.Image")));
             this.reportsBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.reportsBtn.Location = new System.Drawing.Point(2, 382);
+            this.reportsBtn.Location = new System.Drawing.Point(5, 417);
             this.reportsBtn.Name = "reportsBtn";
             this.reportsBtn.Size = new System.Drawing.Size(193, 45);
             this.reportsBtn.TabIndex = 2;
@@ -120,7 +152,7 @@
             this.inventoryBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.inventoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("inventoryBtn.Image")));
             this.inventoryBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.inventoryBtn.Location = new System.Drawing.Point(2, 275);
+            this.inventoryBtn.Location = new System.Drawing.Point(2, 251);
             this.inventoryBtn.Name = "inventoryBtn";
             this.inventoryBtn.Size = new System.Drawing.Size(193, 45);
             this.inventoryBtn.TabIndex = 1;
@@ -139,7 +171,7 @@
             this.salesBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.salesBtn.Image = ((System.Drawing.Image)(resources.GetObject("salesBtn.Image")));
             this.salesBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.salesBtn.Location = new System.Drawing.Point(2, 489);
+            this.salesBtn.Location = new System.Drawing.Point(-3, 500);
             this.salesBtn.Name = "salesBtn";
             this.salesBtn.Size = new System.Drawing.Size(193, 45);
             this.salesBtn.TabIndex = 1;
@@ -168,17 +200,6 @@
             this.billingBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.billingBtn.UseVisualStyleBackColor = true;
             this.billingBtn.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::supermarket_pos.Properties.Resources.grocery1;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(199, 104);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
             // 
             // billing1
             // 
@@ -209,6 +230,13 @@
             this.sales1.Size = new System.Drawing.Size(1067, 697);
             this.sales1.TabIndex = 4;
             // 
+            // customers1
+            // 
+            this.customers1.Location = new System.Drawing.Point(199, -1);
+            this.customers1.Name = "customers1";
+            this.customers1.Size = new System.Drawing.Size(1067, 697);
+            this.customers1.TabIndex = 5;
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,6 +247,7 @@
             this.Controls.Add(this.inventory1);
             this.Controls.Add(this.report1);
             this.Controls.Add(this.sales1);
+            this.Controls.Add(this.customers1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Dashboard";
@@ -245,6 +274,8 @@
         private inventory inventory1;
         private report report1;
         private sales sales1;
+        private System.Windows.Forms.Button button1;
+        private customers customers1;
     }
 }
 

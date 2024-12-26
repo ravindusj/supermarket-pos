@@ -56,7 +56,7 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Cursor = System.Windows.Forms.Cursors.AppStarting;
+            this.panel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel1.Location = new System.Drawing.Point(527, 57);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(325, 142);
@@ -83,6 +83,7 @@
             this.label2.Size = new System.Drawing.Size(131, 28);
             this.label2.TabIndex = 6;
             this.label2.Text = "<Amount>";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -101,7 +102,7 @@
             this.panel3.Controls.Add(this.pictureBox3);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.label7);
-            this.panel3.Cursor = System.Windows.Forms.Cursors.AppStarting;
+            this.panel3.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel3.Location = new System.Drawing.Point(172, 57);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(325, 142);
