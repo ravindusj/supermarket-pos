@@ -59,6 +59,12 @@
     <Compile Include="customers.Designer.cs">
       <DependentUpon>customers.cs</DependentUpon>
     </Compile>
+    <Compile Include="customer_detect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="customer_detect.Designer.cs">
+      <DependentUpon>customer_detect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,17 +109,17 @@
     <Compile Include="reven.Designer.cs">
       <DependentUpon>reven.cs</DependentUpon>
     </Compile>
-    <Compile Include="sales.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="sales.Designer.cs">
-      <DependentUpon>sales.cs</DependentUpon>
-    </Compile>
     <Compile Include="staff.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="staff.Designer.cs">
       <DependentUpon>staff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="staff_report.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="staff_report.Designer.cs">
+      <DependentUpon>staff_report.cs</DependentUpon>
     </Compile>
     <Compile Include="_MINIMART_POSDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -130,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="customers.resx">
       <DependentUpon>customers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="customer_detect.resx">
+      <DependentUpon>customer_detect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
@@ -157,11 +166,11 @@
     <EmbeddedResource Include="reven.resx">
       <DependentUpon>reven.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sales.resx">
-      <DependentUpon>sales.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="staff.resx">
       <DependentUpon>staff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="staff_report.resx">
+      <DependentUpon>staff_report.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

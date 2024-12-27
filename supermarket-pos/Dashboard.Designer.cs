@@ -41,7 +41,7 @@
             this.billing1 = new supermarket_pos.billing();
             this.inventory1 = new supermarket_pos.inventory();
             this.report1 = new supermarket_pos.report();
-            this.sales1 = new supermarket_pos.sales();
+            this.sales1 = new supermarket_pos.staff();
             this.customers1 = new supermarket_pos.customers();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -73,7 +73,7 @@
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.Location = new System.Drawing.Point(3, 334);
+            this.button1.Location = new System.Drawing.Point(-3, 417);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(193, 45);
             this.button1.TabIndex = 11;
@@ -133,7 +133,7 @@
             this.reportsBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.reportsBtn.Image = ((System.Drawing.Image)(resources.GetObject("reportsBtn.Image")));
             this.reportsBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.reportsBtn.Location = new System.Drawing.Point(5, 417);
+            this.reportsBtn.Location = new System.Drawing.Point(3, 500);
             this.reportsBtn.Name = "reportsBtn";
             this.reportsBtn.Size = new System.Drawing.Size(193, 45);
             this.reportsBtn.TabIndex = 2;
@@ -152,7 +152,7 @@
             this.inventoryBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.inventoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("inventoryBtn.Image")));
             this.inventoryBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.inventoryBtn.Location = new System.Drawing.Point(2, 251);
+            this.inventoryBtn.Location = new System.Drawing.Point(5, 251);
             this.inventoryBtn.Name = "inventoryBtn";
             this.inventoryBtn.Size = new System.Drawing.Size(193, 45);
             this.inventoryBtn.TabIndex = 1;
@@ -171,11 +171,11 @@
             this.salesBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.salesBtn.Image = ((System.Drawing.Image)(resources.GetObject("salesBtn.Image")));
             this.salesBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.salesBtn.Location = new System.Drawing.Point(-3, 500);
+            this.salesBtn.Location = new System.Drawing.Point(5, 334);
             this.salesBtn.Name = "salesBtn";
             this.salesBtn.Size = new System.Drawing.Size(193, 45);
             this.salesBtn.TabIndex = 1;
-            this.salesBtn.Text = "Sales";
+            this.salesBtn.Text = "Staff";
             this.salesBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.salesBtn.UseVisualStyleBackColor = true;
             this.salesBtn.Click += new System.EventHandler(this.button2_Click);
@@ -273,7 +273,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private inventory inventory1;
         private report report1;
-        private sales sales1;
+        private staff sales1;
         private System.Windows.Forms.Button button1;
         private customers customers1;
     }

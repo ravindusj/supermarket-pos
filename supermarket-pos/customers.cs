@@ -46,6 +46,7 @@ namespace supermarket_pos
             textBox4.Clear(); // Assuming textBox1 is for customer name
             textBox2.Clear(); // Assuming textBox2 is for phone number
             textBox3.Clear(); // Assuming textBox3 is for email
+    
             textBox1.Text = GetNextCustomerId().ToString(); // Assuming textBox4 is for customer ID
         }
         // Load event - initialize the form
@@ -54,6 +55,12 @@ namespace supermarket_pos
             textBox1.Text = GetNextCustomerId().ToString();
             textBox1.ReadOnly = true; // Make customer ID read-only
             LoadCustomerData();
+
+            Timer timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += timer1_Tick;
+            timer.Start();
+            UpdateDateTime();
         }
         private void LoadCustomerData()
         {
@@ -172,13 +179,164 @@ namespace supermarket_pos
 
         private void button3_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow row = dataGridView1.SelectedRows[0];
 
+                    // Populate textboxes with selected row data
+                    textBox1.Text = row.Cells["Customer ID"].Value.ToString();
+                    textBox2.Text = row.Cells["Customer Name"].Value.ToString();
+                    textBox3.Text = row.Cells["Phone Number"].Value.ToString();
+                    textBox4.Text = row.Cells["Email"].Value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a row to update.", "Selection Required",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error selecting customer: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void save_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(textBox1.Text) ||
+                    string.IsNullOrWhiteSpace(textBox2.Text) ||
+                    string.IsNullOrWhiteSpace(textBox3.Text) ||
+                    string.IsNullOrWhiteSpace(textBox4.Text))
+                {
+                    MessageBox.Show("Please fill in all required fields.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string updateQuery = @"UPDATE customer_details 
+                                 SET customer_name = @customer_name,
+                                     phone_number = @phone_number,
+                                     email = @email
+                                 WHERE customer_id = @customer_id";
+
+                    using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@customer_id", int.Parse(textBox1.Text));
+                        cmd.Parameters.AddWithValue("@customer_name", textBox2.Text.Trim());
+                        cmd.Parameters.AddWithValue("@phone_number", textBox3.Text.Trim());
+                        cmd.Parameters.AddWithValue("@email", textBox4.Text.Trim());
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("Customer updated successfully!", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadCustomerData();
+                ResetForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating customer: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void FilterData()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // First, let's verify the column names from the view
+                    string baseQuery = "SELECT TOP 1 * FROM vw_customer_details";
+                    using (SqlCommand cmd = new SqlCommand(baseQuery, connection))
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        DataTable schemaTable = reader.GetSchemaTable();
+                        reader.Close();
+                    }
+
+                    // Base query for filtering - use the column names as they appear in your view
+                    string query = "SELECT * FROM vw_customer_details WHERE 1=1";
+
+                    // Append conditions if search boxes are not empty
+                    if (!string.IsNullOrEmpty(textBox5.Text))
+                    {
+                        // Assuming the column name in the view is "Customer Name" (with a space)
+                        query += " AND [Customer Name] LIKE @customer_name";
+                    }
+
+                    if (!string.IsNullOrEmpty(textBox6.Text))
+                    {
+                        // Assuming the column name in the view is "Phone Number" (with a space)
+                        query += " AND [Phone Number] LIKE @phone_number";
+                    }
+
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    // Add parameters if the search boxes are not empty
+                    if (!string.IsNullOrEmpty(textBox5.Text))
+                    {
+                        command.Parameters.AddWithValue("@customer_name", "%" + textBox5.Text.Trim() + "%");
+                    }
+
+                    if (!string.IsNullOrEmpty(textBox6.Text))
+                    {
+                        command.Parameters.AddWithValue("@phone_number", "%" + textBox6.Text.Trim() + "%");
+                    }
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable filteredTable = new DataTable();
+                    adapter.Fill(filteredTable);
+
+                    // Update DataGridView with the filtered data
+                    dataGridView1.DataSource = filteredTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error filtering data: " + ex.Message);
+                }
+            }
         }
 
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            FilterData();
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            FilterData();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            UpdateDateTime();
+        }
+        private void UpdateDateTime()
+        {
+            label11.Text = DateTime.Now.ToString("yyyy-MM-dd") + "  " + DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
+
 }

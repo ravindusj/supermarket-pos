@@ -39,7 +39,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.reven1 = new supermarket_pos.reven();
-            this.staff1 = new supermarket_pos.staff();
+            this.staff1 = new supermarket_pos.staff_report();
             this.inven1 = new supermarket_pos.inven();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -201,7 +201,7 @@
         private System.Windows.Forms.Timer timer1;
         private reven reven1;
         private System.Windows.Forms.Panel panel1;
-        private staff staff1;
+        private staff_report staff1;
         private inven inven1;
     }
 }

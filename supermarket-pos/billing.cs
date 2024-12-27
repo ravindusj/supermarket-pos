@@ -103,119 +103,7 @@ namespace supermarket_pos
         private void label10_Click(object sender, EventArgs e)
         {
         }
-        private void UpdateSalesForDate(DateTime date)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    connection.Open();
-
-                    // Calculate total sales for the date
-                    string getTotalQuery = @"
-                        SELECT SUM(total) 
-                        FROM billing 
-                        WHERE CAST(date AS DATE) = @date";
-
-                    decimal dailyTotal = 0;
-                    using (SqlCommand command = new SqlCommand(getTotalQuery, connection))
-                    {
-                        command.Parameters.AddWithValue("@date", date.Date);
-                        object result = command.ExecuteScalar();
-                        if (result != null && result != DBNull.Value)
-                        {
-                            dailyTotal = Convert.ToDecimal(result);
-                        }
-                    }
-
-                    // Try to update existing record first
-                    string updateQuery = @"
-                        UPDATE sales 
-                        SET total_amount_of_sale = @total 
-                        WHERE date = @date";
-
-                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
-                    {
-                        command.Parameters.AddWithValue("@date", date.Date);
-                        command.Parameters.AddWithValue("@total", dailyTotal);
-                        int rowsAffected = command.ExecuteNonQuery();
-
-                        // If no record exists, insert new one
-                        if (rowsAffected == 0)
-                        {
-                            string insertQuery = @"
-                                INSERT INTO sales (date, total_amount_of_sale) 
-                                VALUES (@date, @total)";
-
-                            command.CommandText = insertQuery;
-                            command.ExecuteNonQuery();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error updating sales record: " + ex.Message);
-                }
-            }
-        }
-
-        private void UpdateProfitsForDate(DateTime date)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    connection.Open();
-
-                    // Calculate total profits for the date
-                    string getTotalProfitQuery = @"
-                SELECT SUM((bd.quantity * (inv.retail_price - inv.whole_price))) as daily_profit
-                FROM bill_details bd
-                JOIN Billing b ON bd.billing_no = b.billing_no
-                JOIN inventory inv ON bd.productID = inv.productID
-                WHERE CAST(b.date AS DATE) = @date";
-
-                    decimal dailyProfit = 0;
-                    using (SqlCommand command = new SqlCommand(getTotalProfitQuery, connection))
-                    {
-                        command.Parameters.AddWithValue("@date", date.Date);
-                        object result = command.ExecuteScalar();
-                        if (result != null && result != DBNull.Value)
-                        {
-                            dailyProfit = Convert.ToDecimal(result);
-                        }
-                    }
-
-                    // Try to update existing record first
-                    string updateQuery = @"
-                UPDATE daily_profits 
-                SET total_profit = @profit 
-                WHERE date = @date";
-
-                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
-                    {
-                        command.Parameters.AddWithValue("@date", date.Date);
-                        command.Parameters.AddWithValue("@profit", dailyProfit);
-                        int rowsAffected = command.ExecuteNonQuery();
-
-                        // If no record exists, insert new one
-                        if (rowsAffected == 0)
-                        {
-                            string insertQuery = @"
-                        INSERT INTO daily_profits (date, total_profit) 
-                        VALUES (@date, @profit)";
-
-                            command.CommandText = insertQuery;
-                            command.ExecuteNonQuery();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error updating profits record: " + ex.Message);
-                }
-            }
-        }
+ 
         private void button3_Click(object sender, EventArgs e)
         {
             string billNo = textBox1.Text;
@@ -242,72 +130,59 @@ namespace supermarket_pos
                 try
                 {
                     connection.Open();
-                    using (SqlTransaction transaction = connection.BeginTransaction())
+
+                    // Save main bill
+                    using (SqlCommand command = new SqlCommand("sp_SaveCompleteBill", connection))
                     {
-                        try
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@billing_no", billNo);
+                        command.Parameters.AddWithValue("@date", date);
+                        command.Parameters.AddWithValue("@payment", payment);
+                        command.Parameters.AddWithValue("@cashier", cashier);
+                        command.Parameters.AddWithValue("@total", totalAmount);
+                        command.Parameters.AddWithValue("@customer_name", customername.Text.Replace("Hi ! ", ""));
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Save bill details and update inventory for each product
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        if (row.Cells["ProductID"].Value == null) continue;
+
+                        string productId = row.Cells["ProductID"].Value.ToString();
+                        int quantity = Convert.ToInt32(row.Cells["Quantity"].Value);
+                        decimal price = Convert.ToDecimal(row.Cells["RetailPrice"].Value);
+                        decimal rowTotal = Convert.ToDecimal(row.Cells["TotalAmount"].Value);
+
+                        using (SqlCommand command = new SqlCommand("sp_SaveBillDetailsAndUpdateInventory", connection))
                         {
-                            string query = "INSERT INTO billing (billing_no, date, payment, cashier, total) VALUES (@billing_no, @date, @payment, @cashier, @total)";
-                            using (SqlCommand command = new SqlCommand(query, connection, transaction))
-                            {
-                                command.Parameters.AddWithValue("@billing_no", billNo);
-                                command.Parameters.AddWithValue("@date", date);
-                                command.Parameters.AddWithValue("@payment", payment);
-                                command.Parameters.AddWithValue("@cashier", cashier);
-                                command.Parameters.AddWithValue("@total", totalAmount);
-
-                                command.ExecuteNonQuery();
-                            }
-
-                            foreach (DataGridViewRow row in dataGridView1.Rows)
-                            {
-                                if (row.Cells["ProductID"].Value == null) continue;
-
-                                string productId = row.Cells["ProductID"].Value.ToString();
-                                int quantity = Convert.ToInt32(row.Cells["Quantity"].Value);
-                                decimal price = Convert.ToDecimal(row.Cells["RetailPrice"].Value);
-                                decimal rowTotal = Convert.ToDecimal(row.Cells["TotalAmount"].Value);
-
-                                query = "INSERT INTO bill_details (billing_no, productID, quantity, price, total) VALUES (@billing_no, @productID, @quantity, @price, @total)";
-                                using (SqlCommand command = new SqlCommand(query, connection, transaction))
-                                {
-                                    command.Parameters.AddWithValue("@billing_no", billNo);
-                                    command.Parameters.AddWithValue("@productId", productId);
-                                    command.Parameters.AddWithValue("@quantity", quantity);
-                                    command.Parameters.AddWithValue("@price", price);
-                                    command.Parameters.AddWithValue("@total", totalAmount);
-                                    command.ExecuteNonQuery();
-                                }
-
-                                // Update inventory quantity
-                                query = "UPDATE inventory SET quantity = quantity - @quantity WHERE productID = @productId";
-                                using (SqlCommand command = new SqlCommand(query, connection, transaction))
-                                {
-                                    command.Parameters.AddWithValue("@quantity", quantity);
-                                    command.Parameters.AddWithValue("@productId", productId);
-                                    command.ExecuteNonQuery();
-                                }
-                            }
-
-                            transaction.Commit();
-
-                            UpdateSalesForDate(dateTimePicker1.Value);
-                            UpdateProfitsForDate(dateTimePicker1.Value);
-
-                            MessageBox.Show("Bill saved successfully!");
-                            GenerateUniqueBillNumber();
-                            dataGridView1.Rows.Clear();
-                            totalBill = 0;
-                            discountAmount = 0;
-                            label9.Text = "Total Amount: 0.00";
-                            label10.Text = "Discount: 0.00";
-                            label11.Text = "$0.00";
-                        }
-                        catch (Exception)
-                        {
-                            transaction.Rollback();
-                            throw;
+                            command.CommandType = CommandType.StoredProcedure;
+                            command.Parameters.AddWithValue("@billing_no", billNo);
+                            command.Parameters.AddWithValue("@productID", productId);
+                            command.Parameters.AddWithValue("@quantity", quantity);
+                            command.Parameters.AddWithValue("@price", price);
+                            command.Parameters.AddWithValue("@total", totalAmount);
+                            command.Parameters.AddWithValue("@customer_name", customername.Text.Replace("Hi ! ", ""));
+                            command.ExecuteNonQuery();
                         }
                     }
+
+                    // Update daily sales and profits
+                    using (SqlCommand command = new SqlCommand("sp_UpdateDailySalesAndProfits", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@date", dateTimePicker1.Value.Date);
+                        command.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("Bill saved successfully!");
+                    GenerateUniqueBillNumber();
+                    dataGridView1.Rows.Clear();
+                    totalBill = 0;
+                    discountAmount = 0;
+                    label9.Text = "Total Amount: 0.00";
+                    label10.Text = "Discount: 0.00";
+                    label11.Text = "$0.00";
                 }
                 catch (Exception ex)
                 {
@@ -460,33 +335,6 @@ namespace supermarket_pos
             AddProductToGrid();
         }
 
-        private void DeleteSelectedProduct()
-        {
-            if (dataGridView1.CurrentRow != null)
-            {
-                dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
-                UpdateTotalBill();
-            }
-        }
-
-        private void PrintBill()
-        {
-            if (dataGridView1.Rows.Count == 0)
-            {
-                MessageBox.Show("No items to print");
-                return;
-            }
-        }
-
-        private void ProcessPayment()
-        {
-            if (dataGridView1.Rows.Count == 0)
-            {
-                MessageBox.Show("No items in the bill");
-                return;
-            }
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -526,6 +374,23 @@ namespace supermarket_pos
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            customer_detect customerDetectForm = new customer_detect();
+            if (customerDetectForm.ShowDialog() == DialogResult.OK)
+            {
+                // Update the customer name label with the retrieved customer name
+                customername.Text = "Hi ! " + customerDetectForm.CustomerName;
+            }
+
+
+        }
+
+        private void customername_Click(object sender, EventArgs e)
         {
 
         }

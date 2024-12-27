@@ -31,25 +31,30 @@ namespace supermarket_pos
         // Method to load data into DataGridView
         private void LoadData()
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    connection.Open();
-                    string query = "SELECT * FROM inventory";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    DataTable table = new DataTable();
+                    conn.Open();
+                    string query = "SELECT * FROM InventoryView";
 
-                    adapter.Fill(table);
-                    dataGridView1.DataSource = table;
-                    CalculateTotalValue();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error loading data: " + ex.Message);
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+
+                        dataGridView1.DataSource = dataTable;
+
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading staff data: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -291,7 +296,7 @@ namespace supermarket_pos
                     connection.Open();
 
                     // Base query for filtering
-                    string query = "SELECT * FROM inventory WHERE 1=1";
+                    string query = "SELECT * FROM InventoryView WHERE 1=1";
 
                     // Append conditions if search boxes are not empty
                     if (!string.IsNullOrEmpty(textBox5.Text))
@@ -386,6 +391,20 @@ namespace supermarket_pos
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        private void ResetForm()
+        {
+            textBox1.Clear();
+            textBox2.Clear(); // Customer Name
+            textBox3.Clear(); // Phone Number
+            textBox4.Clear(); // Email
+            textBox7.Clear(); // Search by Customer ID
         }
     }
 }
