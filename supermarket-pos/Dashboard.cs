@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace supermarket_pos
 {
     public partial class Dashboard : Form
@@ -20,9 +21,14 @@ namespace supermarket_pos
 
         private void button5_Click(object sender, EventArgs e)
         {
+        if (UserSession.IsLoggedIn)
+        {
+            loginpage.LogoutUser(UserSession.Username);
+        }
             loginpage login = new loginpage();
             this.Hide();
             login.Show();
+           
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -64,5 +70,20 @@ namespace supermarket_pos
         {
             customers1.BringToFront();
         }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                if (UserSession.IsLoggedIn)
+                {
+                    loginpage.LogoutUser(UserSession.Username);
+                }
+                Application.Exit();
+            }
+        }
+
+
     }
+
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,37 +13,192 @@ namespace supermarket_pos
 {
     public partial class loginpage : Form
     {
+        private readonly string connectionString = "Data Source=LAPTOP-G4G46K72\\SQLEXPRESS;Initial Catalog=MINIMART-POS;Integrated Security=True;TrustServerCertificate=True";
+
         public loginpage()
         {
             InitializeComponent();
             this.Text = "Login - Mini Mart";
+            UserSession.ClearSession();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string username = textBox1.Text;
+            string username = textBox1.Text.Trim();
             string password = textBox2.Text;
 
-            //if (username == credentials.username && password == credentials.password)
-            //{
-            //    Dashboard dash = new Dashboard();
-            //    this.Hide();
-            //    dash.Show();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Invalid username or password");
-            //}
-            Dashboard dash = new Dashboard();
-            this.Hide();
-            dash.Show();
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter both username and password", "Login Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            if (AuthenticateUser(username, password))
+            {
+                Dashboard dash = new Dashboard();
+                this.Hide();
+                dash.Show();
+            }
 
         }
+        private bool AuthenticateUser(string username, string password)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
 
-        private void loginpage_Load(object sender, EventArgs e)
+                    string checkLoginQuery = "SELECT is_logged_in, last_login FROM staff WHERE username = @username";
+                    using (SqlCommand checkCmd = new SqlCommand(checkLoginQuery, connection))
+                    {
+                        checkCmd.Parameters.AddWithValue("@username", username);
+                        using (SqlDataReader reader = checkCmd.ExecuteReader())
+                        {
+                            if (reader.Read() && (bool)reader["is_logged_in"])
+                            {
+                                DateTime lastLogin = reader["last_login"] != DBNull.Value
+                                    ? (DateTime)reader["last_login"]
+                                    : DateTime.MinValue;
+
+                                string message = $"This account is currently logged in.\n" +
+                                               $"Last login: {lastLogin}\n\n" +
+                                               "If you believe this is an error, please contact your administrator.";
+
+                                MessageBox.Show(message, "Login Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return false;
+                            }
+                        }
+                    }
+
+                    // Store user info
+                    string staffName = null;
+                    string role = null;
+
+                    // Authenticate user
+                    string query = @"SELECT name, role FROM staff 
+                           WHERE username = @username AND password = @password 
+                           AND is_logged_in = 0";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@username", username);
+                        command.Parameters.AddWithValue("@password", password);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                staffName = reader["name"].ToString();
+                                role = reader["role"].ToString();
+                            }
+                        } // Reader is properly closed here
+                    }
+
+                    // If authentication failed
+                    if (staffName == null)
+                    {
+                        // Log failed login attempt
+                        LogLoginAttempt(connection, username, false);
+
+                        MessageBox.Show("Invalid username or password", "Login Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+
+                    // Set user as logged in
+                    string updateQuery = @"
+                UPDATE staff 
+                SET is_logged_in = 1, 
+                    last_login = GETDATE() 
+                WHERE username = @username";
+
+                    using (SqlCommand updateCmd = new SqlCommand(updateQuery, connection))
+                    {
+                        updateCmd.Parameters.AddWithValue("@username", username);
+                        updateCmd.ExecuteNonQuery();
+                    }
+
+                    // Log successful login attempt
+                    LogLoginAttempt(connection, username, true);
+
+                    // Set session
+                    UserSession.SetSession(username, staffName, role);
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error during login: " + ex.Message, "System Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
+        private void LogLoginAttempt(SqlConnection connection, string username, bool success)
+        {
+            string logQuery = @"
+            INSERT INTO staff_login_history (staff_id, login_time, action, success) 
+            VALUES (@username, GETDATE(), 'LOGIN', @success)";
+
+            using (SqlCommand logCmd = new SqlCommand(logQuery, connection))
+            {
+                logCmd.Parameters.AddWithValue("@username", username);
+                logCmd.Parameters.AddWithValue("@success", success);
+                logCmd.ExecuteNonQuery();
+            }
+        }
+        public static void LogoutUser(string username)
+        {
+            using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-G4G46K72\\SQLEXPRESS;Initial Catalog=MINIMART-POS;Integrated Security=True;TrustServerCertificate=True"))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Update staff table
+                    string updateQuery = "UPDATE staff SET is_logged_in = 0 WHERE username = @username";
+                    using (SqlCommand updateCmd = new SqlCommand(updateQuery, connection))
+                    {
+                        updateCmd.Parameters.AddWithValue("@username", username);
+                        updateCmd.ExecuteNonQuery();
+                    }
+
+                    // Log the logout
+                    string logQuery = @"
+                    INSERT INTO staff_login_history (staff_id, login_time, action, success) 
+                    VALUES (@username, GETDATE(), 'LOGOUT', 1)";
+
+                    using (SqlCommand logCmd = new SqlCommand(logQuery, connection))
+                    {
+                        logCmd.Parameters.AddWithValue("@username", username);
+                        logCmd.ExecuteNonQuery();
+                    }
+
+                    // Clear session
+                    UserSession.ClearSession();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error during logout: " + ex.Message, "System Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void loginpage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (UserSession.IsLoggedIn)
+            {
+                LogoutUser(UserSession.Username);
+            }
+        }
+                private void loginpage_Load(object sender, EventArgs e)
         {
 
         }
     }
+
 }

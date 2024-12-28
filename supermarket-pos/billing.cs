@@ -22,6 +22,12 @@ namespace supermarket_pos
             // Set the format to show date only
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+
+            if (!string.IsNullOrEmpty(UserSession.StaffName))
+            {
+                textBox4.Text = UserSession.StaffName;
+                textBox4.ReadOnly = true; // Make it read-only
+            }
         }
 
         // New methods for bill number generation
