@@ -110,6 +110,7 @@ namespace supermarket_pos
             string date = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string payment = comboBox1.Text;
             string cashier = textBox4.Text;
+            string customername = customerno.Text;
 
             decimal totalAmount;
             if (!decimal.TryParse(label11.Text.Replace("$", "").Replace(",", ""), out totalAmount))
@@ -140,7 +141,7 @@ namespace supermarket_pos
                         command.Parameters.AddWithValue("@payment", payment);
                         command.Parameters.AddWithValue("@cashier", cashier);
                         command.Parameters.AddWithValue("@total", totalAmount);
-                        command.Parameters.AddWithValue("@customer_name", customername.Text.Replace("Hi ! ", ""));
+                        command.Parameters.AddWithValue("@customer_name", customername);
                         command.ExecuteNonQuery();
                     }
 
@@ -162,7 +163,7 @@ namespace supermarket_pos
                             command.Parameters.AddWithValue("@quantity", quantity);
                             command.Parameters.AddWithValue("@price", price);
                             command.Parameters.AddWithValue("@total", totalAmount);
-                            command.Parameters.AddWithValue("@customer_name", customername.Text.Replace("Hi ! ", ""));
+                            command.Parameters.AddWithValue("@customer_name", customername);
                             command.ExecuteNonQuery();
                         }
                     }
@@ -383,14 +384,12 @@ namespace supermarket_pos
             customer_detect customerDetectForm = new customer_detect();
             if (customerDetectForm.ShowDialog() == DialogResult.OK)
             {
-                // Update the customer name label with the retrieved customer name
-                customername.Text = "Hi ! " + customerDetectForm.CustomerName;
+                customerno.Text = customerDetectForm.CustomerName;
             }
 
 
         }
-
-        private void customername_Click(object sender, EventArgs e)
+        private void customerno_TextChanged(object sender, EventArgs e)
         {
 
         }

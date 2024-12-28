@@ -37,6 +37,7 @@
             // 
             this.phonenum.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.phonenum.Location = new System.Drawing.Point(158, 43);
+            this.phonenum.MaxLength = 10;
             this.phonenum.Name = "phonenum";
             this.phonenum.Size = new System.Drawing.Size(150, 31);
             this.phonenum.TabIndex = 8;
