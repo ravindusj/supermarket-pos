@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.customer = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.logoutBtn = new System.Windows.Forms.Button();
@@ -40,9 +40,9 @@
             this.billingBtn = new System.Windows.Forms.Button();
             this.billing1 = new supermarket_pos.billing();
             this.inventory1 = new supermarket_pos.inventory();
-            this.report1 = new supermarket_pos.report();
             this.sales1 = new supermarket_pos.staff();
             this.customers1 = new supermarket_pos.customers();
+            this.report2 = new supermarket_pos.report();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +51,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.customer);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.logoutBtn);
@@ -64,23 +64,23 @@
             this.panel1.Size = new System.Drawing.Size(199, 700);
             this.panel1.TabIndex = 0;
             // 
-            // button1
+            // customer
             // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 14.25F);
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.Location = new System.Drawing.Point(-3, 417);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(193, 45);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Customers";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.customer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.customer.FlatAppearance.BorderSize = 0;
+            this.customer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customer.Font = new System.Drawing.Font("Century Gothic", 14.25F);
+            this.customer.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.customer.Image = ((System.Drawing.Image)(resources.GetObject("customer.Image")));
+            this.customer.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.customer.Location = new System.Drawing.Point(1, 417);
+            this.customer.Name = "customer";
+            this.customer.Size = new System.Drawing.Size(193, 45);
+            this.customer.TabIndex = 12;
+            this.customer.Text = "Customers";
+            this.customer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.customer.UseVisualStyleBackColor = true;
+            this.customer.Click += new System.EventHandler(this.customer_Click);
             // 
             // pictureBox1
             // 
@@ -203,7 +203,8 @@
             // 
             // billing1
             // 
-            this.billing1.Location = new System.Drawing.Point(199, -1);
+            this.billing1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.billing1.Location = new System.Drawing.Point(199, 0);
             this.billing1.Name = "billing1";
             this.billing1.Size = new System.Drawing.Size(1067, 697);
             this.billing1.TabIndex = 1;
@@ -211,48 +212,52 @@
             // 
             // inventory1
             // 
-            this.inventory1.Location = new System.Drawing.Point(197, 0);
+            this.inventory1.Location = new System.Drawing.Point(201, 0);
             this.inventory1.Name = "inventory1";
             this.inventory1.Size = new System.Drawing.Size(1067, 697);
             this.inventory1.TabIndex = 2;
             // 
-            // report1
-            // 
-            this.report1.Location = new System.Drawing.Point(197, 0);
-            this.report1.Name = "report1";
-            this.report1.Size = new System.Drawing.Size(1067, 697);
-            this.report1.TabIndex = 3;
-            // 
             // sales1
             // 
-            this.sales1.Location = new System.Drawing.Point(197, 0);
+            this.sales1.Location = new System.Drawing.Point(200, 0);
             this.sales1.Name = "sales1";
             this.sales1.Size = new System.Drawing.Size(1067, 697);
             this.sales1.TabIndex = 4;
             // 
             // customers1
             // 
-            this.customers1.Location = new System.Drawing.Point(199, -1);
+            this.customers1.Location = new System.Drawing.Point(201, -1);
             this.customers1.Name = "customers1";
             this.customers1.Size = new System.Drawing.Size(1067, 697);
             this.customers1.TabIndex = 5;
+            // 
+            // report2
+            // 
+            this.report2.Location = new System.Drawing.Point(199, 0);
+            this.report2.Name = "report2";
+            this.report2.Size = new System.Drawing.Size(1067, 697);
+            this.report2.TabIndex = 6;
+            this.report2.Load += new System.EventHandler(this.report2_Load);
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 697);
+            this.ControlBox = false;
             this.Controls.Add(this.billing1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.inventory1);
-            this.Controls.Add(this.report1);
             this.Controls.Add(this.sales1);
             this.Controls.Add(this.customers1);
+            this.Controls.Add(this.report2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mini Mart - Dashboard";
+            this.Load += new System.EventHandler(this.Dashboard_Load_1);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -272,10 +277,10 @@
         private billing billing1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private inventory inventory1;
-        private report report1;
         private staff sales1;
-        private System.Windows.Forms.Button button1;
         private customers customers1;
+        private System.Windows.Forms.Button customer;
+        private report report2;
     }
 }
 

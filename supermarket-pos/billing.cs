@@ -10,27 +10,24 @@ namespace supermarket_pos
         private readonly string connectionString = "Data Source=LAPTOP-G4G46K72\\SQLEXPRESS;Initial Catalog=MINIMART-POS;Integrated Security=True;TrustServerCertificate=True";
         private decimal totalBill = 0;
         private decimal discountAmount = 0;
-        private Random random = new Random(); // For bill number generation
+        private Random random = new Random();
 
         public billing()
         {
             InitializeComponent();
             InitializeDataGridView();
-            GenerateUniqueBillNumber(); // Generate initial bill number
+            GenerateUniqueBillNumber();
 
             dateTimePicker1.Value = DateTime.Now;
-            // Set the format to show date only
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "yyyy-MM-dd";
 
             if (!string.IsNullOrEmpty(UserSession.StaffName))
             {
                 textBox4.Text = UserSession.StaffName;
-                textBox4.ReadOnly = true; // Make it read-only
+                textBox4.ReadOnly = true;
             }
         }
-
-        // New methods for bill number generation
         private bool IsBillNumberExists(string billNumber)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -52,7 +49,6 @@ namespace supermarket_pos
                 }
             }
         }
-
         private void GenerateUniqueBillNumber()
         {
             string billNumber;
@@ -66,14 +62,10 @@ namespace supermarket_pos
             textBox1.Text = billNumber;
         }
 
-
-
-
-
-
         private void label7_Click(object sender, EventArgs e)
         {
         }
+
         private void label9_Click(object sender, EventArgs e)
         {
         }
@@ -82,19 +74,13 @@ namespace supermarket_pos
         {
         }
 
-
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }
 
-
-
         private void label8_Click_1(object sender, EventArgs e)
         {
         }
-
-
 
         private void label11_Click(object sender, EventArgs e)
         {
@@ -138,7 +124,7 @@ namespace supermarket_pos
                 {
                     connection.Open();
 
-                    // Save main bill
+
                     using (SqlCommand command = new SqlCommand("sp_SaveCompleteBill", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
@@ -151,7 +137,6 @@ namespace supermarket_pos
                         command.ExecuteNonQuery();
                     }
 
-                    // Save bill details and update inventory for each product
                     foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
                         if (row.Cells["ProductID"].Value == null) continue;
@@ -174,7 +159,6 @@ namespace supermarket_pos
                         }
                     }
 
-                    // Update daily sales and profits
                     using (SqlCommand command = new SqlCommand("sp_UpdateDailySalesAndProfits", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
@@ -232,7 +216,6 @@ namespace supermarket_pos
                         {
                             if (reader.Read())
                             {
-                                // Product details logic remains the same
                             }
                         }
                     }
@@ -307,7 +290,6 @@ namespace supermarket_pos
             }
             label9.Text = "Total Amount: " + totalBill.ToString("C");
 
-            // Update final amount after discount
             decimal finalAmount = totalBill - discountAmount;
             label11.Text = finalAmount.ToString("C");
         }
@@ -329,7 +311,7 @@ namespace supermarket_pos
             timer.Tick += timer1_Tick;
             timer.Start();
             UpdateDateTime();
-            GenerateUniqueBillNumber(); // Generate unique bill number when form loads
+            GenerateUniqueBillNumber();
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -400,7 +382,4 @@ namespace supermarket_pos
 
         }
     }
-
-
-
 }

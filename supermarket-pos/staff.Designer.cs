@@ -222,8 +222,6 @@
             this.comboBox1.Items.AddRange(new object[] {
             "Cashier",
             "Store Manager",
-            "Assistant Manager",
-            "Customer Service",
             "Stocker",
             "Accountant"});
             this.comboBox1.Location = new System.Drawing.Point(128, 209);

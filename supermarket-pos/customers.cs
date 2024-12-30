@@ -14,14 +14,11 @@ namespace supermarket_pos
     public partial class customers : UserControl
     {
         private readonly string connectionString = "Data Source=LAPTOP-G4G46K72\\SQLEXPRESS;Initial Catalog=MINIMART-POS;Integrated Security=True;TrustServerCertificate=True";
-        private int currentCustomerId = 0;
         public customers()
         {
             InitializeComponent();
 
         }
-
-        // Method to get the next customer ID
         private int GetNextCustomerId()
         {
             int nextId = 1;
@@ -40,20 +37,18 @@ namespace supermarket_pos
             }
             return nextId;
         }
-        // Reset form fields
         private void ResetForm()
         {
-            textBox4.Clear(); // Assuming textBox1 is for customer name
-            textBox2.Clear(); // Assuming textBox2 is for phone number
-            textBox3.Clear(); // Assuming textBox3 is for email
+            textBox4.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
     
-            textBox1.Text = GetNextCustomerId().ToString(); // Assuming textBox4 is for customer ID
+            textBox1.Text = GetNextCustomerId().ToString();
         }
-        // Load event - initialize the form
         private void customers_Load(object sender, EventArgs e)
         {
             textBox1.Text = GetNextCustomerId().ToString();
-            textBox1.ReadOnly = true; // Make customer ID read-only
+            textBox1.ReadOnly = true;
             LoadCustomerData();
 
             Timer timer = new Timer();
@@ -185,7 +180,6 @@ namespace supermarket_pos
                 {
                     DataGridViewRow row = dataGridView1.SelectedRows[0];
 
-                    // Populate textboxes with selected row data
                     textBox1.Text = row.Cells["Customer ID"].Value.ToString();
                     textBox2.Text = row.Cells["Customer Name"].Value.ToString();
                     textBox3.Text = row.Cells["Phone Number"].Value.ToString();
@@ -257,7 +251,6 @@ namespace supermarket_pos
                 {
                     connection.Open();
 
-                    // First, let's verify the column names from the view
                     string baseQuery = "SELECT TOP 1 * FROM vw_customer_details";
                     using (SqlCommand cmd = new SqlCommand(baseQuery, connection))
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -266,25 +259,20 @@ namespace supermarket_pos
                         reader.Close();
                     }
 
-                    // Base query for filtering - use the column names as they appear in your view
                     string query = "SELECT * FROM vw_customer_details WHERE 1=1";
 
-                    // Append conditions if search boxes are not empty
                     if (!string.IsNullOrEmpty(textBox5.Text))
                     {
-                        // Assuming the column name in the view is "Customer Name" (with a space)
                         query += " AND [Customer Name] LIKE @customer_name";
                     }
 
                     if (!string.IsNullOrEmpty(textBox6.Text))
                     {
-                        // Assuming the column name in the view is "Phone Number" (with a space)
                         query += " AND [Phone Number] LIKE @phone_number";
                     }
 
                     SqlCommand command = new SqlCommand(query, connection);
 
-                    // Add parameters if the search boxes are not empty
                     if (!string.IsNullOrEmpty(textBox5.Text))
                     {
                         command.Parameters.AddWithValue("@customer_name", "%" + textBox5.Text.Trim() + "%");
@@ -299,7 +287,6 @@ namespace supermarket_pos
                     DataTable filteredTable = new DataTable();
                     adapter.Fill(filteredTable);
 
-                    // Update DataGridView with the filtered data
                     dataGridView1.DataSource = filteredTable;
                 }
                 catch (Exception ex)

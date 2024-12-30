@@ -73,11 +73,9 @@ namespace supermarket_pos
                         }
                     }
 
-                    // Store user info
                     string staffName = null;
                     string role = null;
 
-                    // Authenticate user
                     string query = @"SELECT name, role FROM staff 
                            WHERE username = @username AND password = @password 
                            AND is_logged_in = 0";
@@ -94,21 +92,17 @@ namespace supermarket_pos
                                 staffName = reader["name"].ToString();
                                 role = reader["role"].ToString();
                             }
-                        } // Reader is properly closed here
+                        }
                     }
 
-                    // If authentication failed
                     if (staffName == null)
                     {
-                        // Log failed login attempt
                         LogLoginAttempt(connection, username, false);
 
                         MessageBox.Show("Invalid username or password", "Login Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
-
-                    // Set user as logged in
                     string updateQuery = @"
                 UPDATE staff 
                 SET is_logged_in = 1, 
@@ -121,10 +115,8 @@ namespace supermarket_pos
                         updateCmd.ExecuteNonQuery();
                     }
 
-                    // Log successful login attempt
                     LogLoginAttempt(connection, username, true);
 
-                    // Set session
                     UserSession.SetSession(username, staffName, role);
 
                     return true;
@@ -159,7 +151,6 @@ namespace supermarket_pos
                 {
                     connection.Open();
 
-                    // Update staff table
                     string updateQuery = "UPDATE staff SET is_logged_in = 0 WHERE username = @username";
                     using (SqlCommand updateCmd = new SqlCommand(updateQuery, connection))
                     {
@@ -167,7 +158,6 @@ namespace supermarket_pos
                         updateCmd.ExecuteNonQuery();
                     }
 
-                    // Log the logout
                     string logQuery = @"
                     INSERT INTO staff_login_history (staff_id, login_time, action, success) 
                     VALUES (@username, GETDATE(), 'LOGOUT', 1)";
@@ -178,7 +168,6 @@ namespace supermarket_pos
                         logCmd.ExecuteNonQuery();
                     }
 
-                    // Clear session
                     UserSession.ClearSession();
                 }
                 catch (Exception ex)
@@ -195,8 +184,9 @@ namespace supermarket_pos
                 LogoutUser(UserSession.Username);
             }
         }
-                private void loginpage_Load(object sender, EventArgs e)
+        private void loginpage_Load(object sender, EventArgs e)
         {
+
 
         }
     }

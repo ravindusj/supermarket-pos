@@ -21,14 +21,12 @@ namespace supermarket_pos
         {
             InitializeComponent();
 
-            // Load data into DataGridView when the UserControl initializes
             LoadData();
             dataGridView1.CellValueChanged += DataGridView1_CellValueChanged;
             dataGridView1.RowsAdded += DataGridView1_RowsAdded;
             dataGridView1.RowsRemoved += DataGridView1_RowsRemoved;
         }
 
-        // Method to load data into DataGridView
         private void LoadData()
         {
             try
@@ -89,7 +87,6 @@ namespace supermarket_pos
                         insertCommand.ExecuteNonQuery();
                         MessageBox.Show("Product added successfully!");
 
-                        // Refresh the DataGridView
                         LoadData();
                     }
                     else
@@ -127,7 +124,7 @@ namespace supermarket_pos
                             if (rowsAffected > 0)
                             {
                                 MessageBox.Show("Product deleted successfully!");
-                                LoadData(); // Refresh the DataGridView
+                                LoadData();
                             }
                             else
                             {
@@ -153,12 +150,10 @@ namespace supermarket_pos
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // Check if a row is selected
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
 
-                // Extract data from the selected row
                 textBox1.Text = selectedRow.Cells["productID"].Value.ToString();
                 textBox2.Text = selectedRow.Cells["name"].Value.ToString();
                 textBox3.Text = selectedRow.Cells["quantity"].Value.ToString();
@@ -182,7 +177,6 @@ namespace supermarket_pos
                     string updateQuery = "UPDATE inventory SET name = @name, quantity = @quantity, retail_price = @retail_price, whole_price = @whole_price WHERE productID = @productID";
                     SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
 
-                    // Use text box values for the update
                     updateCommand.Parameters.AddWithValue("@productID", textBox1.Text);
                     updateCommand.Parameters.AddWithValue("@name", textBox2.Text);
                     updateCommand.Parameters.AddWithValue("@quantity", textBox3.Text);
@@ -195,7 +189,6 @@ namespace supermarket_pos
                     {
                         MessageBox.Show("Record updated successfully!");
 
-                        // Refresh the DataGridView
                         LoadData();
                     }
                     else
@@ -220,19 +213,16 @@ namespace supermarket_pos
 
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            // Recalculate total when a cell value changes
             CalculateTotalValue();
         }
 
         private void DataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            // Recalculate total when rows are added
             CalculateTotalValue();
         }
 
         private void DataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            // Recalculate total when rows are removed
             CalculateTotalValue();
         }
 
@@ -254,30 +244,23 @@ namespace supermarket_pos
         {
             try
             {
-                // Initialize the total value
                 totalValue = 0;
 
-                // Loop through the DataGridView rows
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    // Ensure the row is not a new row
                     if (!row.IsNewRow)
                     {
-                        // Access the quantity and price cells directly
                         if (row.Cells["quantity"].Value != null && row.Cells["whole_price"].Value != null)
                         {
-                            // Parse quantity and price
                             if (int.TryParse(row.Cells["quantity"].Value.ToString(), out int quantity) &&
                                 decimal.TryParse(row.Cells["whole_price"].Value.ToString(), out decimal whole_price))
                             {
-                                // Calculate the product and add it to the total
                                 totalValue += quantity * whole_price;
                             }
                         }
                     }
                 }
 
-                // Update the label with the calculated total value
                 label5.Text = totalValue.ToString("C");
             }
             catch (Exception ex)
@@ -295,10 +278,8 @@ namespace supermarket_pos
                 {
                     connection.Open();
 
-                    // Base query for filtering
                     string query = "SELECT * FROM InventoryView WHERE 1=1";
 
-                    // Append conditions if search boxes are not empty
                     if (!string.IsNullOrEmpty(textBox5.Text))
                     {
                         query += " AND productID LIKE @productID";
@@ -311,7 +292,6 @@ namespace supermarket_pos
 
                     SqlCommand command = new SqlCommand(query, connection);
 
-                    // Add parameters if the search boxes are not empty
                     if (!string.IsNullOrEmpty(textBox5.Text))
                     {
                         command.Parameters.AddWithValue("@productID", "%" + textBox5.Text.Trim() + "%");
@@ -326,10 +306,8 @@ namespace supermarket_pos
                     DataTable filteredTable = new DataTable();
                     adapter.Fill(filteredTable);
 
-                    // Update DataGridView with the filtered data
                     dataGridView1.DataSource = filteredTable;
 
-                    // Optionally recalculate the total value
                     CalculateTotalValue();
                 }
                 catch (Exception ex)
@@ -401,10 +379,10 @@ namespace supermarket_pos
         private void ResetForm()
         {
             textBox1.Clear();
-            textBox2.Clear(); // Customer Name
-            textBox3.Clear(); // Phone Number
-            textBox4.Clear(); // Email
-            textBox7.Clear(); // Search by Customer ID
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox7.Clear();
         }
     }
 }

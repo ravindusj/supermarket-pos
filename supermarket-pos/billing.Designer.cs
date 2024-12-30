@@ -121,7 +121,8 @@
             this.comboBox1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Cash"});
+            "Cash",
+            "Card"});
             this.comboBox1.Location = new System.Drawing.Point(110, 85);
             this.comboBox1.MaximumSize = new System.Drawing.Size(160, 0);
             this.comboBox1.Name = "comboBox1";

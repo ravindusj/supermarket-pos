@@ -20,7 +20,6 @@ namespace supermarket_pos
             InitializeComponent();
             this.Text = "Customer ?";
         }
-
         private void customer_detect_Load(object sender, EventArgs e)
         {
 

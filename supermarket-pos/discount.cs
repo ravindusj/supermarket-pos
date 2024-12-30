@@ -42,13 +42,13 @@ namespace supermarket_pos
             {
                 textBox1.Enabled = true;
                 textBox2.Enabled = false;
-                textBox2.Clear(); // Clear percentage textbox
+                textBox2.Clear();
             }
             else if (comboBox1.SelectedItem.ToString() == "Percentage")
             {
                 textBox1.Enabled = false;
                 textBox2.Enabled = true;
-                textBox1.Clear(); // Clear amount textbox
+                textBox1.Clear();
             }
         }
 

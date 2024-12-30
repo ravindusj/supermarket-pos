@@ -38,7 +38,6 @@ namespace supermarket_pos
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
 
-                        // Assuming your DataGridView is named dataGridView1
                         dataGridView1.DataSource = dataTable;
 
                     }
@@ -109,7 +108,6 @@ namespace supermarket_pos
         {
             try
             {
-                // Validate input fields
                 if (string.IsNullOrWhiteSpace(textBox7.Text) ||
                     string.IsNullOrWhiteSpace(textBox1.Text) ||
                     string.IsNullOrWhiteSpace(textBox2.Text) ||
@@ -125,20 +123,17 @@ namespace supermarket_pos
                 {
                     conn.Open();
 
-                    // Create SQL command
                     string query = @"INSERT INTO staff (username, password, name, role, phone_no) 
                                    VALUES (@username, @password, @name, @role, @phone)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // Add parameters to prevent SQL injection
                         cmd.Parameters.AddWithValue("@username", textBox7.Text.Trim());
                         cmd.Parameters.AddWithValue("@password", textBox1.Text.Trim());
                         cmd.Parameters.AddWithValue("@name", textBox2.Text.Trim());
                         cmd.Parameters.AddWithValue("@role", comboBox1.Text.Trim());
                         cmd.Parameters.AddWithValue("@phone", textBox4.Text.Trim());
 
-                        // Execute the command
                         int result = cmd.ExecuteNonQuery();
 
                         if (result > 0)
@@ -173,7 +168,6 @@ namespace supermarket_pos
         {
             try
             {
-                // Check if a row is selected
                 if (dataGridView1.SelectedRows.Count == 0)
                 {
                     MessageBox.Show("Please select a staff member to delete.", "Warning",
@@ -181,10 +175,8 @@ namespace supermarket_pos
                     return;
                 }
 
-                // Get the selected row
                 DataGridViewRow row = dataGridView1.SelectedRows[0];
 
-                // Confirm deletion with user
                 DialogResult result = MessageBox.Show(
                     $"Are you sure you want to delete staff member: {row.Cells["Full Name"].Value}?",
                     "Confirm Deletion",
@@ -200,10 +192,8 @@ namespace supermarket_pos
 
                         using (SqlCommand cmd = new SqlCommand(query, conn))
                         {
-                            // Add parameter to prevent SQL injection
                             cmd.Parameters.AddWithValue("@username", row.Cells["username"].Value.ToString());
 
-                            // Execute the delete command
                             int rowsAffected = cmd.ExecuteNonQuery();
 
                             if (rowsAffected > 0)
@@ -211,7 +201,6 @@ namespace supermarket_pos
                                 MessageBox.Show("Staff member deleted successfully!", "Success",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                                // Refresh the DataGridView
                                 LoadStaffData();
                             }
                             else
@@ -239,7 +228,6 @@ namespace supermarket_pos
         {
             try
             {
-                // Check if a row is selected
                 if (dataGridView1.SelectedRows.Count == 0)
                 {
                     MessageBox.Show("Please select a staff member to update.", "Warning",
@@ -247,18 +235,15 @@ namespace supermarket_pos
                     return;
                 }
 
-                // Get the selected row
                 DataGridViewRow row = dataGridView1.SelectedRows[0];
 
-                // Populate textboxes with selected row data
                 textBox7.Text = row.Cells["Username"].Value.ToString();
                 textBox1.Text = row.Cells["Password"].Value.ToString();
                 textBox2.Text = row.Cells["Full Name"].Value.ToString();
                 comboBox1.Text = row.Cells["Role"].Value.ToString();
                 textBox4.Text = row.Cells["Phone Number"].Value.ToString();
 
-                // Store original username for update query
-                textBox7.Tag = textBox7.Text; // Store original username
+                textBox7.Tag = textBox7.Text;
             }
             catch (Exception ex)
             {
@@ -271,7 +256,6 @@ namespace supermarket_pos
         {
             try
             {
-                // Validate input fields
                 if (string.IsNullOrWhiteSpace(textBox7.Text) ||
                     string.IsNullOrWhiteSpace(textBox1.Text) ||
                     string.IsNullOrWhiteSpace(textBox2.Text) ||
@@ -283,7 +267,6 @@ namespace supermarket_pos
                     return;
                 }
 
-                // Get original username from Tag
                 string originalUsername = textBox7.Tag?.ToString();
                 if (string.IsNullOrWhiteSpace(originalUsername))
                 {
@@ -296,7 +279,6 @@ namespace supermarket_pos
                 {
                     conn.Open();
 
-                    // Create SQL command for update
                     string query = @"UPDATE staff 
                            SET username = @newUsername,
                                password = @password,
@@ -307,7 +289,6 @@ namespace supermarket_pos
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // Add parameters to prevent SQL injection
                         cmd.Parameters.AddWithValue("@newUsername", textBox7.Text.Trim());
                         cmd.Parameters.AddWithValue("@password", textBox1.Text.Trim());
                         cmd.Parameters.AddWithValue("@name", textBox2.Text.Trim());
@@ -315,7 +296,6 @@ namespace supermarket_pos
                         cmd.Parameters.AddWithValue("@phone", textBox4.Text.Trim());
                         cmd.Parameters.AddWithValue("@originalUsername", originalUsername);
 
-                        // Execute the command
                         int result = cmd.ExecuteNonQuery();
 
                         if (result > 0)
@@ -323,7 +303,7 @@ namespace supermarket_pos
                             MessageBox.Show("Staff member updated successfully!", "Success",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ClearFields();
-                            LoadStaffData(); // Refresh the grid
+                            LoadStaffData();
                         }
                         else
                         {
@@ -373,10 +353,8 @@ namespace supermarket_pos
                 {
                     connection.Open();
 
-                    // Base query for filtering
                     string query = "SELECT * FROM vw_StaffDetails WHERE 1=1";
 
-                    // Append conditions if search boxes are not empty
                     if (!string.IsNullOrEmpty(textBox5.Text))
                     {
                         query += " AND username LIKE @username";
@@ -389,7 +367,6 @@ namespace supermarket_pos
 
                     SqlCommand command = new SqlCommand(query, connection);
 
-                    // Add parameters if the search boxes are not empty
                     if (!string.IsNullOrEmpty(textBox5.Text))
                     {
                         command.Parameters.AddWithValue("@username", "%" + textBox5.Text.Trim() + "%");
@@ -404,7 +381,6 @@ namespace supermarket_pos
                     DataTable filteredTable = new DataTable();
                     adapter.Fill(filteredTable);
 
-                    // Update DataGridView with the filtered data
                     dataGridView1.DataSource = filteredTable;
 
                 }
